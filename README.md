@@ -3,6 +3,13 @@ RUST QUIZ Nexer Engineering
 
 This repo contains a set of Quiz, problems and some other material useful for learning Rust. These are tailored specifically for C++ developers at Nexer Engineering SW.
 
+## How to do work with the quizzes.
+
+There are 3 categories of quizzes/problems prepared in this repo organized in the subdirectories in this repo. 
+* `./basics` - These are meant to teach/practice the basics of the language
+* `./`
+
+
 ## Quick words from me regarding rust
 
 Rust is a programming language created and mainly developed by Mozilla Foundation, initially to create the new web-engine for Firefox. From my experience in University is that people call this things like
