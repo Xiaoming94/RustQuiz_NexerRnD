@@ -28,7 +28,7 @@ std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b)
 To spice things up a bit, lets add some prints. Lets add some additional operations in the `add_two_numbers` function in rust.
 
 ```rust
-fn  add_two_numbers(a: u32, b: u32) -> u32 {
+fn add_two_numbers(a: u32, b: u32) -> u32 {
     let ans = a + b;
     println!("adding numbers: {a} + {b} = {ans}");
     ans
@@ -42,5 +42,38 @@ fn  add_two_numbers(a: u32, b: u32) -> u32 {
   * Why do you need it if you use `return`?
   * What would happen if you used `;` without `return`?
   * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other?
+
+### Question 3 (HARD)
+
+Consider this rust function
+```rust
+fn print_even_numbers(numbers_vec: Vec<i32>)
+{
+    fn is_even(number: i32) -> bool { number % 2 == 0 }
+    for number in numbers_vec {
+        if is_even(number) {
+            print!("{number} ");
+        }
+    }
+}
+```
+* What is this function doing?
+* What is the return type of this function?
+* What do you think is going on on the 2nd line of this function?
+
+This code of block can also be re-written as
+```rust
+fn print_even_numbers(numbers_vec: Vec<i32>)
+{
+    let is_even = |number| number % 2 == 0;
+    for number in numbers_vec {
+        if is_even(number) {
+            print!("{number} ");
+        }
+    }
+}
+```
+* What do you think is happened to `is_even`?
+* [*Discussions/thinking*] What is the benefit of this syntax and the previous one?
 
 ## Part 2
