@@ -30,10 +30,17 @@ To spice things up a bit, lets add some prints. Lets add some additional operati
 ```rust
 fn  add_two_numbers(a: u32, b: u32) -> u32 {
     let ans = a + b;
-    println!("adding numbers: {a} + {b} = {c}");
+    println!("adding numbers: {a} + {b} = {ans}");
     ans
 }
 ```
 
 * Why is there an exclaimation mark in the `println!()` function?
-* What happens on the 2nd line?
+* What do you think the `let` keyword means?
+* [*This one is harder*] The last part of this function can also be written as `return ans;`
+  * What does the semicolon `;` do?
+  * Why do you need it if you use `return`?
+  * What would happen if you used `;` without `return`?
+  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other?
+
+## Part 2
