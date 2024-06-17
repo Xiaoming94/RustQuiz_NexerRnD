@@ -41,7 +41,7 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
   * What does the semicolon `;` do?
   * Why do you need it if you use `return`?
   * What would happen if you used `;` without `return`?
-  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other?
+  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other (Hint: Look at the next question)?
 
 ### Question 3 (HARD)
 
@@ -74,6 +74,6 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
 }
 ```
 * What do you think is happened to `is_even`?
-* [*Discussions/thinking*] What is the benefit of this syntax and the previous one?
+* [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?
 
 ## Part 2
