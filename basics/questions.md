@@ -5,6 +5,7 @@ These are the basic questions. The goal is to teach you the basics in a practica
 I've decided to divide these questions into parts.
 
 ## Part 1
+This part is meant for whoever is doing this quiz to familiarize with the Rust syntax. 
 ### Question 1
 Consider this rust function:
 ```rust
@@ -43,7 +44,7 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
   * What would happen if you used `;` without `return`?
   * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other (Hint: Look at the next question)?
 
-### Question 3 (HARD)
+### Question 3
 
 Consider this rust function
 ```rust
@@ -75,5 +76,28 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
 ```
 * What do you think is happened to `is_even`?
 * [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?
+
+### Question 4
+
+Let's use the `print_even_numbers` function from before and add some more context around it.
+```rust
+fn print_even_numbers(numbers_vec: Vec<i32>) {
+    let is_even = |number| number % 2 == 0;
+    for number in numbers_vec {
+        if is_even(number) {
+            print!("{number} ");
+        }
+    }
+}
+
+fn main() {
+    let my_numbers = vec![1,4,6,2,5,6,8];
+    let more_numbers = Vec::from([3,2,4,1,2,5,6]);
+    print_even_numbers(my_numbers);
+    print_even_numbers(more_numbers);
+}
+```
+* What will this program print to the command line?
+* What do you think on Line1 and Line2 of the `main()`?
 
 ## Part 2
