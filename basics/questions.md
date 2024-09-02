@@ -98,6 +98,124 @@ fn main() {
 }
 ```
 * What will this program print to the command line?
-* What do you think on Line1 and Line2 of the `main()`?
+* What do you think is happening on Line1 and Line2 of the `main()`?
 
-## Part 2
+### Question 5
+This question uses a custom defined struct.
+```rust
+#[derive(Debug)]
+struct MyStruct {
+    name: String,
+    age: u32,
+}
+
+impl MyStruct {
+    fn new(name: &str, age: u32) -> Self {
+        MyStruct {
+            name: String::from(name),
+            age: age,
+        }
+    } 
+}
+
+fn function_with_struct1(arg: MyStruct) {
+    println!("{:?}", arg);
+}
+
+fn function_with_struct2(arg: MyStruct) {
+    println!("{:?}", arg);
+}
+
+fn main() {
+    let struct_instance = MyStruct::new("Alex", 20);
+    function_with_struct1(struct_instance);
+    function_with_struct2(struct_instance);
+}
+```
+There will be a separate sections about structs later in rust. For now consider the C++ code below as the equivalent:
+```C++
+struct MyStruct {
+    std::string name;
+    std::uint32_t age;
+
+    MyStruct(std::string name, std::uint32_t age):
+        m_name(name),
+        m_age(age)
+    {}
+}
+
+void functionWithStruct1(const MyStruct arg) {
+    std::cout << "{" << arg.m_name << ", " << arg.m_age <<"}" << std::endl;
+}
+
+void functionWithStruct2(const MyStruct arg) {
+    std::cout << "{" << arg.m_name << ", " << arg.m_age <<"}" << std::endl;
+}
+
+int main() {
+    const auto structInstance{MyStruct("Alex", 20)};
+
+    functionWithStruct1(structInstance);
+    functionWithStruct2(structInstance);
+}
+
+```
+* If you try and compile the rust code, you will notice that the code fails to compile, why?
+*
+
+## Part2
+
+This part of the quiz is about rusts' type system.
+Colloquially, rust is described as a **statically typed** language with a **strong type-system** - within the programming language community.
+However, what does this mean for a simple programmer?
+There is alot of material online that describes these terms, including alot alot of material of how a type system can or should be designed.
+This is called type-theory.
+In short however, a overly simplified way of looking at these terms is that they can be boiled down to the following:
+* **Statically typed**: The type of a variable/object is determined before the code is executed (For instance, during compilation or when loading the code into the interpreter).
+* **Dynamically typed**: The type of a variable/object is determined runtime.
+* **Strong type-system**: The type system is pretty strict - usually with no (pre-determined) implicit type-casting.
+* **Weak type-system**: There are alot more implicit type-casting and other ways of bypassing the type-checking.
+
+Note:
+    The terms *strong* and *weak* type-systems are actually not universally defined, and the difference is constantly debated.
+    This is way generally in type-theory, the term **type-safety** is preferred. Thus, another way you can defined these two weaker terminologies as:
+    * **Strong type-system**: The type system and it's type-safety is strictly enforced with no way of bypassing it.
+    * **Weak type-system**: There are known ways to bypass the type-system and thus the type-safety that comes with it.
+
+### Question 1)
+
+Consider the following code:
+```rust
+fn string_function1(arg: &str) {
+    println!("{arg}");
+}
+
+fn string_function2(arg: &String) {
+    println!("{arg}");
+}
+
+fn main() {
+    string_function1("Hello my string");
+    string_function2("Hello my string");
+}
+
+```
+
+Which equivalently in C++ can be written as.
+```C++
+void stringFunction1(const char* arg) {
+    std::cout << arg << std::endl;
+}
+
+void stringFunction2(const std::string& arg) {
+    std::cout << arg << std::endl;
+}
+
+int main() {
+    stringFunction1("Hello my string");
+    stringFunction2("Hello my string");
+}
+
+```
+* The rust version of this simple program will actually fail to compile, why?
+* Any suggestion on how to fix it?
