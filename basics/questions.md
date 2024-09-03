@@ -4,6 +4,10 @@ These are the basic questions. The goal is to teach you the basics in a practica
 
 I've decided to divide these questions into parts.
 
+A tip from my end when you are working your way through the quiz, if there are code you want to try and execute yourself,
+Rust is supported on [godbolt](https://godbolt.org/).
+You can also try your code in the [rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021)
+
 ## Part 1
 This part is meant for whoever is doing this quiz to familiarize with the Rust syntax. 
 ### Question 1
@@ -132,7 +136,7 @@ fn main() {
     function_with_struct2(struct_instance);
 }
 ```
-There will be a separate sections about structs later in rust. For now consider the C++ code below as the equivalent:
+There will be a separate sections about structs later. For now consider the C++ code below as the equivalent:
 ```C++
 struct MyStruct {
     std::string name;
@@ -161,7 +165,46 @@ int main() {
 
 ```
 * If you try and compile the rust code, you will notice that the code fails to compile, why?
-*
+* Do you have any suggestions how to fix this? (Don't spend too much time here since we will explore this in later parts)
+
+### Question 6
+Consider this following, slightly larger rust snippet:
+
+```rust
+fn tuple_function(arg: u32) -> (u32, u32) {
+    (arg+1, arg+2)
+}
+
+fn divide_if_even(arg: u32) -> Option<u32> {
+    match arg % 2 {
+        0 => Some(arg/2),
+        _ => None,
+    }
+}
+
+fn main() {
+    let a = 2;
+    let a = a + 4;
+    
+    //Print 1
+    println!("{a}");
+
+    let (var1, var2) = tuple_function(a);
+    println!("Var1 : {var1}, Var2 : {var2}");
+
+    if let Some(half_a) = divide_if_even(a) {
+        println!("Half of {a} is: {half_a}");
+    }
+}
+
+```
+* What's the console output of this program?
+* What do you think is happening in the second `let a` statement?
+* What do you think is happening in the `let ...` statement before the 2nd `println!()`?
+
+The code before the last print is related to the `Option<>` type, which is an `enum`.
+Enums in rust will be explored later.
+The `if let...` statement on the other hand will only be evaluated to true if the `let` code is successfully assigned.
 
 ## Part2
 
@@ -190,7 +233,7 @@ fn string_function1(arg: &str) {
     println!("{arg}");
 }
 
-fn string_function2(arg: &String) {
+fn string_function2(arg: String) {
     println!("{arg}");
 }
 
@@ -219,3 +262,7 @@ int main() {
 ```
 * The rust version of this simple program will actually fail to compile, why?
 * Any suggestion on how to fix it?
+
+### Question 2)
+Now, lets consider this code: 
+
