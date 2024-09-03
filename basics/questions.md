@@ -204,6 +204,7 @@ fn main() {
 
 The code before the last print is related to the `Option<>` type, which is an `enum`.
 Enums in rust will be explored later.
+For now, just understand that enums in rust are very different from traditional enums found in C/C++ and Java.
 The `if let...` statement on the other hand will only be evaluated to true if the `let` code is successfully assigned.
 
 ## Part2
@@ -221,9 +222,13 @@ In short however, a overly simplified way of looking at these terms is that they
 
 Note:
     The terms *strong* and *weak* type-systems are actually not universally defined, and the difference is constantly debated.
-    This is way generally in type-theory, the term **type-safety** is preferred. Thus, another way you can defined these two weaker terminologies as:
-    * **Strong type-system**: The type system and it's type-safety is strictly enforced with no way of bypassing it.
-    * **Weak type-system**: There are known ways to bypass the type-system and thus the type-safety that comes with it.
+    This is way generally in type-theory, the term **type-safety** is preferred.
+    Thus, another way you can define these two weaker terminologies is:
+
+* **Strong type-system**: The type system and it's type-safety is strictly enforced with no way of bypassing it.
+* **Weak type-system**: There are known ways to bypass the type-system and thus the type-safety that comes with it.
+
+Fruit for thought: Rust's strict type-system is one of the reasons why rust is considered to be memory-safe too, Why?
 
 ### Question 1)
 
