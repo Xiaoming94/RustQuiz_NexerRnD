@@ -10,7 +10,7 @@ You can also try your code in the [rust playground](https://play.rust-lang.org/?
 
 ## Part 1
 This part is meant for whoever is doing this quiz to familiarize with the Rust syntax. 
-### Question 1
+#### Question 1
 Consider this rust function:
 ```rust
 fn add_two_numbers(a: u32, b: u32) -> u32 {
@@ -29,7 +29,7 @@ std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b)
 * From this snippet alone, what do you think is the `fn` part in the rust code?
 * What is to the right of the `->` charcters?
 
-### Question 2
+#### Question 2
 To spice things up a bit, lets add some prints. Lets add some additional operations in the `add_two_numbers` function in rust.
 
 ```rust
@@ -48,7 +48,7 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
   * What would happen if you used `;` without `return`?
   * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other (Hint: Look at the next question)?
 
-### Question 3
+#### Question 3
 
 Consider this rust function
 ```rust
@@ -81,7 +81,7 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
 * What do you think is happened to `is_even`?
 * [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?
 
-### Question 4
+#### Question 4
 
 Let's use the `print_even_numbers` function from before and add some more context around it.
 ```rust
@@ -104,7 +104,7 @@ fn main() {
 * What will this program print to the command line?
 * What do you think is happening on Line1 and Line2 of the `main()`?
 
-### Question 5
+#### Question 5
 This question uses a custom defined struct.
 ```rust
 #[derive(Debug)]
@@ -167,7 +167,7 @@ int main() {
 * If you try and compile the rust code, you will notice that the code fails to compile, why?
 * Do you have any suggestions how to fix this? (Don't spend too much time here since we will explore this in later parts)
 
-### Question 6
+#### Question 6
 Consider this following, slightly larger rust snippet:
 
 ```rust
@@ -230,7 +230,10 @@ Note:
 
 Fruit for thought: Rust's strict type-system is one of the reasons why rust is considered to be memory-safe too, Why?
 
-### Question 1)
+## Part 2.1 the basics
+Basics of rust type system
+
+#### Question 1)
 
 Consider the following code:
 ```rust
