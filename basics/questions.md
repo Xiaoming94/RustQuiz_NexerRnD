@@ -285,8 +285,55 @@ int main() {
 
 ```
 * The rust version of this simple program will actually fail to compile, why?
-* Any suggestion on how to fix it?
+* Any suggestion on how to fix it (hint: there are at least 2 ways)?
 
-### Question 2)
-Now, lets consider this code: 
+#### Question 2)
+Consider the code snippet below
+```rust
+fn unsigned_int_function(arg: u32) -> u32 {
+    arg + 2
+}
 
+fn signed_int_function(arg: i32) -> i32 {
+    arg + 2
+}
+
+fn main() {
+    let my_var = 42;
+    let results1 = unsigned_int_function(my_var);
+    let results2 = signed_int_function(my_var);
+    //...
+}
+```
+* Once again, this code will not compile, why?
+* Any suggestions on how to fix it?
+
+#### Question 3)
+Consider this small snippet of code
+```rust
+fn identity_function<T>(obj: T) -> T{
+    obj
+}
+
+fn main() {
+    println!("{:?}", identity_function(1337));
+}
+```
+* What do you think the return type of the function `identity_function()` is?
+* What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a tempalte).
+
+### Part2.2 Custom data types
+
+In rust, there are generally two types of custom data-types, structs and enums.
+Naturally, you can also declare type-aliases through the `type` keyword
+```rust
+type ChessBoard = HashSet<(u32,u32)>;
+```
+But Enums and Structs are the two go-to ways to actually create custom made data-types.
+
+#### Question 4)
+Look carefully at the following code
+```rust
+
+
+```
