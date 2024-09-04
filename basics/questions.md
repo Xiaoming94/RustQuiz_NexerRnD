@@ -183,7 +183,7 @@ fn divide_if_even(arg: u32) -> Option<u32> {
 }
 
 fn main() {
-    let a = 2;
+    let a: u32 = 2;
     let a = a + 4;
     
     //Print 1
@@ -199,13 +199,29 @@ fn main() {
 
 ```
 * What's the console output of this program?
-* What do you think is happening in the second `let a` statement?
+* What do you think is happening in the first and second `let a` statement?
+    * Btw, you can reproduce the effect of these lines without using let, how? (hint: `let mut a = ...;`)
 * What do you think is happening in the `let ...` statement before the 2nd `println!()`?
+* How do you think the `if let ...` statement is evaluated?
 
 The code before the last print is related to the `Option<>` type, which is an `enum`.
 Enums in rust will be explored later.
 For now, just understand that enums in rust are very different from traditional enums found in C/C++ and Java.
-The `if let...` statement on the other hand will only be evaluated to true if the `let` code is successfully assigned.
+
+#### Question 7
+```rust
+mod util {
+    fn calc_sum(a: u32, b: u32) -> u32 {
+        a + b
+    }
+}
+
+fn main() {
+    // Do something?
+}
+```
+* What do you think the `mod` keyword's doing?
+* How should you call the function `calc_sum()` from the `main()` function?
 
 ## Part2
 
