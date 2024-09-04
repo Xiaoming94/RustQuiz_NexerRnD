@@ -199,9 +199,9 @@ fn main() {
 
 ```
 * What's the console output of this program?
-* What do you think is happening in the first and second `let a` statement?
+* What is happening in the first and second `let a` statement?
     * Btw, you can reproduce the effect of these lines without using let, how? (hint: `let mut a = ...;`)
-* What do you think is happening in the `let ...` statement before the 2nd `println!()`?
+* What is happening in the `let ...` statement before the 2nd `println!()`?
 * How do you think the `if let ...` statement is evaluated?
 
 The code before the last print is related to the `Option<>` type, which is an `enum`.
@@ -211,7 +211,7 @@ For now, just understand that enums in rust are very different from traditional 
 #### Question 7
 ```rust
 mod util {
-    fn calc_sum(a: u32, b: u32) -> u32 {
+    pub fn calc_sum(a: u32, b: u32) -> u32 {
         a + b
     }
 }
@@ -220,7 +220,7 @@ fn main() {
     // Do something?
 }
 ```
-* What do you think the `mod` keyword's doing?
+* What is the purpose of the `mod` and `pub` keywords?
 * How should you call the function `calc_sum()` from the `main()` function?
 
 ## Part2
@@ -330,10 +330,65 @@ Naturally, you can also declare type-aliases through the `type` keyword
 type ChessBoard = HashSet<(u32,u32)>;
 ```
 But Enums and Structs are the two go-to ways to actually create custom made data-types.
+Structs are basically a way to create a compound 
 
 #### Question 4)
 Look carefully at the following code
 ```rust
+mod shapes {
+    pub struct Rectangle {
+        width: u32,
+        height: u32,
+    }
 
+    impl Rectangle {
+        pub fn new(width: u32, height: u32) -> Self {
+            Rectangle {
+                width: width,
+                height: height,
+            } 
+        }
 
+        pub fn area(&self) -> u32 {
+            self.width * self.height
+        }
+
+        pub fn circumference(&self) -> u32 {
+            2 * (self.width + self.height)
+        }
+    }
+}
 ```
+* What do you think is happening in the `impl` code block?
+* Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.)
+* (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for 
+    * a *square*?
+    * a *circle*?
+
+#### Question 5)
+The code above can also be rewritten like this, using something called a *tuple struct*:
+```rust
+mod shapes {
+    pub struct Rectangle(u32, u32);
+    
+    impl Rectangle {
+        pub fn new(width: u32, height: u32) -> Self {
+            Rectangle(width, height)
+        }
+
+        pub fn area(&self) -> u32 {
+            let Rectangle(width, height) = self;
+            width * height
+        }
+
+        pub fn cirumference(&self) -> u32 {
+            let Rectangle(width, height) = self;
+            2 * (width + height)
+        }
+    } 
+}
+```
+* What do you think are the pros and cons of a struct defined this way?
+* There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's variables, how?
+
+#### Question 6)
