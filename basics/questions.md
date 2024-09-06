@@ -322,6 +322,45 @@ fn main() {
 * What do you think the return type of the function `identity_function()` is?
 * What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a tempalte).
 
+#### Question 4
+Lets look at some basic type conversion. Consider the followin snippets:
+a)
+```rust
+fn main() {
+    let my_var = -1;
+    let anover_var: u32 = my_var.try_into().unwrap();
+}
+```
+* What would actually happen when you execute this code?
+* What is the `try_into()` function?
+
+b)
+```rust
+fn main() {
+    let my_var: i32 = -42;
+
+    println!("my_var: {}", my_var);
+    println!("my_var as unsigned int: {}", my_var as u32);
+    println!("my_var as float: {}", my_var as f32);
+    println!("my_var as a char: {}", my_var as char);
+}
+```
+* What would the print outs be?
+
+c)
+```rust
+struct OneStruct(u32, u32);
+struct AnotherStruct(u32, u32);
+
+fn main() {
+    let my_object = OneStruct(1,0);
+    let another_type = my_object as AnotherStruct;
+}
+```
+* As a matter of fact, this code will NOT compile, why?
+
+Later on, we will explore how to convert between custom types the correct way.
+
 ### Part2.2 Custom data types
 
 In rust, there are generally two types of custom data-types, structs and enums.
@@ -332,7 +371,7 @@ type ChessBoard = HashSet<(u32,u32)>;
 But Enums and Structs are the two go-to ways to actually create custom made data-types.
 Structs are basically a way to create a compound 
 
-#### Question 4)
+#### Question 5)
 Look carefully at the following code
 ```rust
 mod shapes {
@@ -362,11 +401,12 @@ mod shapes {
 * What is happening in the `impl` code block?
 * What are the difference between the function `new()` and the functions `area()` and `circumference()`?
 * Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.)
+    * Bonus question: Do you **need** a `new()` function to instantiate the struct `Rectangle`?
 * (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for 
     * a *square*?
     * a *circle*?
 
-#### Question 5)
+#### Question 6)
 The code above can also be rewritten like this, using something called a *tuple struct*:
 ```rust
 mod shapes {
@@ -392,7 +432,7 @@ mod shapes {
 * What do you think are the pros and cons of a struct defined this way?
 * There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how?
 
-#### Question 6)
+#### Question 7)
 NOTE: We will actually explore rust Enums through multiple question. While we are at it however, keep in mind of how tuple structs works.
 
 Consider this following example implementation of geometrical shapes.
