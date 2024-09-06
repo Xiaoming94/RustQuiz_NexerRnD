@@ -541,3 +541,8 @@ impl Shapes {
     }
 }
 ```
+* How should the user of this enum call the function area?
+* So, when should a struct be used? When should an enum be used?
+* Without thinking about the implemented function. How do you think the enum `Option<T>` is defined?
+
+## Part 3
