@@ -200,7 +200,7 @@ fn main() {
 ```
 * What's the console output of this program?
 * What is happening in the first and second `let a` statement?
-    * Btw, you can reproduce the effect of these lines without using let, how? (hint: `let mut a = ...;`)
+    * Btw, you can reproduce the effect of these lines without using the 2nd `let a`, how? (hint: `let mut a = ...;`)
 * What is happening in the `let ...` statement before the 2nd `println!()`?
 * How do you think the `if let ...` statement is evaluated?
 
@@ -389,6 +389,6 @@ mod shapes {
 }
 ```
 * What do you think are the pros and cons of a struct defined this way?
-* There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's variables, how?
+* There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how?
 
 #### Question 6)
