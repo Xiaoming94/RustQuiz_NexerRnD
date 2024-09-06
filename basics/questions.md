@@ -359,7 +359,8 @@ mod shapes {
     }
 }
 ```
-* What do you think is happening in the `impl` code block?
+* What is happening in the `impl` code block?
+* What are the difference between the function `new()` and the functions `area()` and `circumference()`?
 * Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.)
 * (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for 
     * a *square*?
@@ -392,3 +393,76 @@ mod shapes {
 * There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how?
 
 #### Question 6)
+NOTE: We will actually explore rust Enums through multiple question. While we are at it however, keep in mind of how tuple structs works.
+
+Consider this following example implementation of geometrical shapes.
+
+```rust
+enum ShapeTypes {
+    Circle,
+    Rectangle,
+}
+
+struct Shape {
+    shape_t : ShapeType,
+    width: u32,
+    height: u32,
+}
+
+impl Shape {
+    pub fn new(width: u32, height: u32, shape: ShapeType) -> Self {
+        match shape {
+            ShapeType::Rectangle => create_rectangle(width, height),
+            ShapeType::Circle => create_circle(width),
+        }
+    }
+
+    fn create_rectangle(width: u32, height: u32) -> Self {
+        Shape {
+            shape_t: ShapeType::Rectangle,
+            width: width,
+            height: height,
+        }
+    }
+
+    fn create_circle(radius: u32) -> Self {
+        Shape {
+            shape_t: ShapeType::Circle,
+            width: radius,
+            height: radius,
+        }
+    }
+
+    pub fn area(&self) -> f32 {
+        match self.shape_t {
+            ShapeType::Circle => circle_area(self.width),
+            ShapeType::Rectangle => rectangle_area(self.width, self.height),
+        }
+    }
+
+    fn circle_area(radius: u32) -> f32 {
+        radius * PI.pow(2) 
+    }
+
+    fn rectangle_area(width: u32, height: u32) -> f32 {
+        width * height as f32
+    } 
+} 
+```
+
+This implementation is not really ideal... but ignore it for now.
+* What's the difference between using an enum in `match` vs using some other types? (like a string or numeric type (u32,i32,f32))
+* While not related to enums, what do you think is the difference between the functions declared with `pub fn` and those declared with only `fn`?
+* (Recommended to use playground) You can also avoid creating functions like `create_rectangle()` and `rectangle_area()` using the syntax
+```rust
+
+match shape_t {
+    ShapeType::Circle => {
+        //do something
+    }
+}
+```
+    * How can this be accomplished?
+    * Which do you prefer and why?
+
+
