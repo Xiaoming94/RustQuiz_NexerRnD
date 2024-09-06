@@ -502,7 +502,42 @@ match shape_t {
     }
 }
 ```
-    * How can this be accomplished?
-    * Which do you prefer and why?
+* How can this be accomplished?
+* Which do you prefer and why?
 
+#### Question 8
+We can, actually, ditch the structs in the previous code like this
+```rust
+enum Shapes {
+    Circle(f32),
+    Rectangle(f32, f32),
+}
 
+fn area(geometric_shape: Shapes) -> f32 {
+    //Do Something
+}
+
+```
+* How would you instantiate a shape this way?
+* How would you implement the function `area()` here?
+    * Using `let if`
+    * Using `match`
+
+#### Question 9
+As a matter of fact, with enums in rust, this is also legal:
+
+```rust
+enum Shapes {
+    Circle(f32),
+    Rectangle(f32, f32),
+}
+
+impl Shapes {
+    fn area(&self) -> f32 {
+        match *self {
+            Circle(radius) => f32 * PI.pow(2),
+            Rectangle(width, height) => width * height,
+        }
+    }
+}
+```
