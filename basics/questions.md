@@ -404,7 +404,7 @@ mod shapes {
     * Bonus question: Do you **need** a `new()` function to instantiate the struct `Rectangle`?
 * (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for 
     * a *square*?
-    * a *circle*?
+    * a *circle*? (the constant for PI is available if you add `use std::f32::consts::PI;` before the declaration of Circle);
 
 #### Question 6)
 The code above can also be rewritten like this, using something called a *tuple struct*:
@@ -546,4 +546,44 @@ impl Shapes {
 * Without thinking about the implemented functions. How do you think the enum `Option<T>` is defined?
 
 ## Part 3
-This part of the 
+In the last part where we explored the rust type-system, you might have an impression of rust's type-system being pretty stiff and strict.
+Which it is - There is alot of discourse about why the type-system in rust being the way it is.
+
+### Part 3.1 What is a trait?
+The concept of traits is kinda in it's name, that the type has a certain characteristics about it defined by it's traits.
+In terms of programming, rust's traits can be thought of as something similar to interfaces.
+
+#### Question 1
+Let's implement geometrical shapes using a trait instead 
+```rust
+trait Shape {
+    fn shape_name();
+    fn area(&self) -> f32;
+    fn circumference(&self) -> f32;
+}
+
+struct Rectangle {
+    width: f32,
+    height: f32,
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> f32 {
+        self.width * self.height
+    }
+
+    fn circumference(&self) -> f32 {
+        2.0 * (self.width + self.height)
+    }
+}
+```
+
+* Using this example as reference, how would you implement shapes for:
+    * Circle?
+    * Square?
+
+* If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these?
+
+### Part 3.2 Rust's built in traits
+
+Out-of-the-box, rust has alot of traits built-in.
