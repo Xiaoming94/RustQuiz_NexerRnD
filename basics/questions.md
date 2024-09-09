@@ -376,23 +376,23 @@ Look carefully at the following code
 ```rust
 mod shapes {
     pub struct Rectangle {
-        width: u32,
-        height: u32,
+        width: f32,
+        height: f32,
     }
 
     impl Rectangle {
-        pub fn new(width: u32, height: u32) -> Self {
+        pub fn new(width: f32, height: f32) -> Self {
             Rectangle {
                 width: width,
                 height: height,
             } 
         }
 
-        pub fn area(&self) -> u32 {
+        pub fn area(&self) -> f32 {
             self.width * self.height
         }
 
-        pub fn circumference(&self) -> u32 {
+        pub fn circumference(&self) -> f32 {
             2 * (self.width + self.height)
         }
     }
@@ -410,19 +410,19 @@ mod shapes {
 The code above can also be rewritten like this, using something called a *tuple struct*:
 ```rust
 mod shapes {
-    pub struct Rectangle(u32, u32);
+    pub struct Rectangle(f32, f32);
     
     impl Rectangle {
-        pub fn new(width: u32, height: u32) -> Self {
+        pub fn new(width: f32, height: f32) -> Self {
             Rectangle(width, height)
         }
 
-        pub fn area(&self) -> u32 {
+        pub fn area(&self) -> f32 {
             let Rectangle(width, height) = self;
             width * height
         }
 
-        pub fn cirumference(&self) -> u32 {
+        pub fn cirumference(&self) -> f32 {
             let Rectangle(width, height) = self;
             2 * (width + height)
         }
@@ -445,19 +445,19 @@ enum ShapeTypes {
 
 struct Shape {
     shape_t : ShapeType,
-    width: u32,
-    height: u32,
+    width: f32,
+    height: f32,
 }
 
 impl Shape {
-    pub fn new(width: u32, height: u32, shape: ShapeType) -> Self {
+    pub fn new(width: f32, height: f32, shape: ShapeType) -> Self {
         match shape {
             ShapeType::Rectangle => create_rectangle(width, height),
             ShapeType::Circle => create_circle(width),
         }
     }
 
-    fn create_rectangle(width: u32, height: u32) -> Self {
+    fn create_rectangle(width: f32, height: f32) -> Self {
         Shape {
             shape_t: ShapeType::Rectangle,
             width: width,
@@ -465,7 +465,7 @@ impl Shape {
         }
     }
 
-    fn create_circle(radius: u32) -> Self {
+    fn create_circle(radius: f32) -> Self {
         Shape {
             shape_t: ShapeType::Circle,
             width: radius,
@@ -480,11 +480,11 @@ impl Shape {
         }
     }
 
-    fn circle_area(radius: u32) -> f32 {
+    fn circle_area(radius: f32) -> f32 {
         radius * PI.pow(2) 
     }
 
-    fn rectangle_area(width: u32, height: u32) -> f32 {
+    fn rectangle_area(width: f32, height: f32) -> f32 {
         width * height as f32
     } 
 } 
@@ -543,6 +543,7 @@ impl Shapes {
 ```
 * How should the user of this enum call the function area?
 * So, when should a struct be used? When should an enum be used?
-* Without thinking about the implemented function. How do you think the enum `Option<T>` is defined?
+* Without thinking about the implemented functions. How do you think the enum `Option<T>` is defined?
 
 ## Part 3
+This part of the 
