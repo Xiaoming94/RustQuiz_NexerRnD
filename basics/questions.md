@@ -583,7 +583,121 @@ impl Shape for Rectangle {
     * Square?
 
 * If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these?
+* Can you control the visibility of the functions define in a trait?
 
 ### Part 3.2 Rust's built in traits
 
-Out-of-the-box, rust has alot of traits built-in.
+Out-of-the-box, rust has alot of traits built-in traits.
+These are built to define certain actions in rust, for instance those that are traditionally done in rust by overriding operators.
+
+#### Question 2
+
+Consider the following code snippet using the `From<T>` trait.
+```rust
+struct Coord(i32, i32);
+
+impl Coord {
+    pub fn new(x_cord: i32, y_cord: i32) -> Self {
+        Coord(x_cord, y_cord)
+    }
+}
+
+impl From<(u32, u32)> for Coord {
+    fn from(pos: (u32, u32)) -> Self {
+        let (x, y) = pos;
+        Coord::new(x, y)
+    }
+}
+```
+* What is the purpose of the `From<T>` trait?
+* How can you make use of the functionality provided by the `From<T>` trait? (Hint: There are two ways)
+
+#### Question 3
+
+Consider now the following code snippet:
+```rust
+#[derive(Debug, Eq, PartialEq)]
+enum Reply {
+    Yes,
+    No,
+}
+
+impl Not for Reply {
+    type Output = Self;
+
+    fn not(self) -> Self::Output {
+        match self {
+            Reply::Yes => Reply::No,
+            Reply::No => Reply::Yes,
+        }
+    }
+}
+```
+* What operation is defined by the `Not` trait?
+
+#### Question 4
+
+Another example of a trait is the `Add<Rhs = Self>` trait.
+```rust
+struct Coord(i32, i32);
+
+type Output = Self
+
+impl Add for Coord {
+    fn add(self, rhs: Self::Other) -> Self::Output {
+        let Self(x1, y1) = self;
+        let Self(x2, y2) = rhs;
+        return Coord::new(x1 + x2, y1 + y2);
+    }
+}
+```
+* What is the operation defined by the `Add<Rhs = Self>` trait? 
+    * What is the meaning of `<Rhs = Self>` in the declaration of this trait?
+    * How can you define the same operation with a different (Rhs) type?
+
+You might have figured out that the `Add` trait defines a certain binary operator and `Not` trait defines a certain unary operator.
+* What other built in traits that are built in in rust also defines behaviour of operators?
+* Flashback now to the `#[define(...)]` used here-and-there previously, what's the meaning behind these lines that happens before a custom type?
+Next few partial questions are highly optional.
+* Do they have to share the same characteristics as their corresponding operators in mathematics? An example of operator with characteristics is the multiplication operator a * b that is: 
+    * **Associative** = `(a * b) * c == a * (b * c)`
+    * **Commutative** = `a * b == b * a`
+* Do you think it's important to keep these characteristics for that operator?
+
+### Part 3.3 Adding traits to generics
+
+Since generic types in rust have no concrete operations defined to them, any operation involving objects with a generic type will result in a compilation error (unless you just plan on doing nothing or just returning the identity object).
+Using traits together with generic is a way to tell the compiler that the object has that certain characteristics and thus are capable of the operations in the function.
+
+#### Question 5
+
+Consider the following function:
+```rust
+fn sort<T: Ord> (list: Vec<T>) -> Vec<T> {
+    // ...
+    // implement some sorting
+    // return sorted vector
+}
+```
+* What does this way of declaration guarantee for the type `T`?
+* How can you use other Traits the same way?
+* How do you ensure that the generic type `T` has more traits defined?
+
+#### Question 6
+
+Another way to use traits together with generics can be done with the `where` clause:
+```rust
+fn perform_task<T,F>(value: T, fun: F)
+where 
+    T: Add + Mul + Debug,
+    F: Fn(T) -> T {
+   // Do something
+}
+```
+* In your opinion, what do you think are the benefits of declaring generic types with a `where` clause?
+* Now that you are familiar with Traits and how to use them with generics, how would you implement a function that takes a geometrical shape with the `Shape` trait we used earlier?
+
+#### Question 7
+
+There are additionally two ways of using traits with more dynamic typing without explicitly using generics.
+Consider these two identical 
