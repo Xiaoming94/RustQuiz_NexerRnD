@@ -718,3 +718,62 @@ For now, think of it as something similar to "Pass-by-reference" in C++ or a "no
 
 * What's the difference between using these two approaches compared to using a generic type?
 * What's the difference between using `dyn` vs `impl`?
+
+## Part 4
+This part is about rust's memory managment and concepts. One of the biggest reason why rust is still matching C/C++ in terms of performance despite being labeled "memory-safe" is because the language doesn't use garbage collection.
+Here we will explore how rust accomplishes this.
+
+### Part 4.1 Move Semantics
+Move semantics is one certain data's ownership is transfered to another scope. In C/C++, this is mostly accomplished through the use of `std::move()`.
+In rust, moving objects is the default behaviour for custom data-types (structs/enums).
+
+#### Question 1 
+Consider the following snippet of code:
+```rust
+#[derive(Debug)]
+struct Cell(u32, u32);
+
+fn print_cell1(cell: Cell) {
+    println!("{:?}", cell);
+}
+
+fn print_cell2(cell: Cell) {
+    println!("{:?}", cell);
+}
+
+fn main() {
+    let my_cell = Cell(1,2);
+    print_cell1(my_cell);
+    print_cell2(my_cell);
+}
+```
+This code should be kind of reminiscent of Part 1 Question 5. But pay attention to the difference.
+* As a warm-up, why doesn't this code compile in rust?
+* How would you go about solving this compilation issue? ( There are many right answers here, we will explore some of them next ).
+
+#### Question 2
+Consider the same example as Question 1.
+
+* You can solve this compilation issue through borrowing (I.e. "Pass-by-reference"), how?
+* Rust provides the trait `Clone` that can be used here too for the struct `Cell`,
+    * What functionality does this trait provide?
+    * How would you use this with this code?
+* In the case of the struct `Cell`, you can also enable behaviour similar to C/C++ "Pass-by-value", how?
+* Unlike this example, the example in part 1, question 5 cannot be "passed-by-value", why?
+
+### Part 4.2 Borrowing and what it entails.
+Rust have a built in memory-management feature that looks rather similar to "pass-by-reference" in C++ called borrowing.
+In fact, the variable that is borrowed can be referred to as a "reference" in daily speak.
+
+What that said, borrowing a variable have more meaning attached to it than just simply passing it by reference.
+
+#### Question 3
+```rust
+struct SomeStruct(String, u32);
+
+fn function_with_borrow(instance: &SomeStruct) {
+    // Do something with instance
+}
+```
+
+*
