@@ -699,5 +699,22 @@ where
 
 #### Question 7
 
-There are additionally two ways of using traits with more dynamic typing without explicitly using generics.
-Consider these two identical 
+There are additionally two ways of using traits with more dynamic typing without explicitly declaring and using generics
+for that function or datastructure (yes, you can create your type such that it takes a generic type parameter through for instance `struct StructName<T> (String, u32);`)
+Consider these two almost identical functions
+```rust
+// Function 1
+fn print_debug_impl(obj: &impl Debug) {
+    println!("{:?}", obj);
+}
+
+// Function 2
+fn print_debug_dynamic(obj: &dyn Debug) {
+    println!("{:?}", obj);
+}
+```
+The ampersand ("&-character") in this context denotes a *borrow*, we will explore this later.
+For now, think of it as something similar to "Pass-by-reference" in C++ or a "non-null pointer".
+
+* What's the difference between using these two approaches compared to using a generic type?
+* What's the difference between using `dyn` vs `impl`?
