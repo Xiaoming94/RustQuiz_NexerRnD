@@ -777,5 +777,49 @@ fn function_with_borrow(instance: &SomeStruct) {
     // Do something with instance
 }
 ```
+* How is this function called from for instance, from `fn main(){...}`?
+* Currently, `instance` is a immutable reference, how should the function `function_with_borrow()` be declared for `instance` to be a mutable reference?
+* If `instance` was a mutable reference, how do you make changes to it?
 
-*
+#### Question 4
+This question might be a little tricky, consider this code snippet.
+Note the difference in how the methods are declared compared to before.
+
+```rust
+enum Symbol {
+    Cross,
+    Point(u32, u32),
+    Val(char),
+}
+
+impl Symbol {
+    fn is_val(self) -> bool {
+        if let Symbol::Val(_) = self {
+            true
+        } else {
+            false
+        }
+    }
+
+    fn is_cross(self) -> bool {
+        match self {
+            Cross => true,
+            _ => false
+        }
+    }
+}
+
+fn main() {
+    let my_symb = Symbol::Point(21,21);
+
+    if my_symb.is_val() {
+        println!("is a val");
+    }
+    if my_symb.is_cross() {
+        println!("is a cross");
+    }
+}
+```
+* Actually, this code will fail to compile, why?
+* The compilation problem can be fixed by borrowing `self` instead, how is this done?
+    * Will this alter the way the methods of `Symbol` is being called?
