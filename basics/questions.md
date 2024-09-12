@@ -823,3 +823,55 @@ fn main() {
 * Actually, this code will fail to compile, why?
 * The compilation problem can be fixed by borrowing `self` instead, how is this done?
     * Will this alter the way the methods of `Symbol` is being called?
+
+#### Question 5
+Consider a struct with these two accessor functions;
+
+```rust
+struct Pos(u32, u32);
+
+struct Piece {
+    position: Pos,
+    name: String,
+}
+
+impl Piece {
+    pub fn get_position(&self) -> &Position {
+        return self.position;
+    }
+
+    pub fn set_position(&mut self, pos: Position) {
+        self.position = pos;
+    }
+
+    pub fn get_name(&self) -> &String {
+        return self.name;
+    }
+}
+
+fn main() {
+    let mut my_piece = Piece {
+        position = Pos(0,0),
+        name = "King",
+    };
+    let current_pos = my_piece.get_position(); 
+    my_piece.set_position(current_pos);
+}
+```
+* Curiously, this one will actually fail to compile, why?
+    * (Optional) Discussion question: how can you make this file compile?
+* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, why isn't it used in this example?
+
+### Part 4.3 The Box<T> smart pointer
+In rust, typically you are not allowed to do manual memory management and pointer operations out of the box.
+This includes for instance manually allocating memory on the heap, dereferencing a raw-pointer, or anything that can trigger undefined behaviour.
+If these operations are required for some reason, the code block and functions has to be declared as `unsafe`.
+
+The people behind rust, however, does recognize the necessities of heap-allocated objects. As thus, it comes with *smart pointers* for this reason.
+Unlike smart pointers in C++, rust smart pointers cannot be `NULL`.
+The one that is most common is `Box<T>` which roughly corresponds to `std::unique_ptr<T>` in C++.
+
+* Given an arbitary struct (for simplicity, lets assume that it has `fn new()` defined). How can you create a `Box<T>` pointer to an instance the struct?
+* What other smart pointers does rust provide?
+* Why is it required that smart pointers in rust cannot be `NULL`?
+* Why do you think `Box<T>` is the most common smart pointer in rust?
