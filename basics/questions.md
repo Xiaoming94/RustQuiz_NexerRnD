@@ -659,7 +659,7 @@ You might have figured out that the `Add` trait defines a certain binary operato
 * What other built in traits that are built in in rust also defines behaviour of operators?
 * Flashback now to the `#[define(...)]` used here-and-there previously, what's the meaning behind these lines that happens before a custom type?
 Next few partial questions are highly optional.
-* Do they have to share the same characteristics as their corresponding operators in mathematics? An example of operator with characteristics is the multiplication operator a * b that is: 
+* Do they have to share the same characteristics as their corresponding operators in mathematics? An example here is that the multiplicator operator has the following characteristics:
     * **Associative** = `(a * b) * c == a * (b * c)`
     * **Commutative** = `a * b == b * a`
 * Do you think it's important to keep these characteristics for that operator?
@@ -765,9 +765,11 @@ Consider the same example as Question 1.
 Rust have a built in memory-management feature that looks rather similar to "pass-by-reference" in C++ called borrowing.
 In fact, the variable that is borrowed can be referred to as a "reference" in daily speak.
 
-What that said, borrowing a variable have more meaning attached to it than just simply passing it by reference.
+With that said, borrowing a variable have more meaning attached to it than just simply passing it by reference.
 
 #### Question 3
+As a warm-up lets look at this code.
+
 ```rust
 struct SomeStruct(String, u32);
 
