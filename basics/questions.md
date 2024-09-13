@@ -8,6 +8,15 @@ A tip from my end when you are working your way through the quiz, if there are c
 Rust is supported on [godbolt](https://godbolt.org/).
 You can also try your code in the [rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021)
 
+Most things here are google-able. In fact, the idea is for you to lookup whatever you need while doing the questions.
+The layout of parts etc is loosely based on a course from udemy.
+
+You can also use this collection of questions after taking the course as a way to test whatever you learned.
+There are also a handful of other courses both on udemy and outside of it.
+I have yet to check whatever content on rust is available on YouTube.
+
+People learn differently ofc.
+
 ## Part 1
 This part is meant for whoever is doing this quiz to familiarize with the Rust syntax. 
 #### Question 1
@@ -875,3 +884,16 @@ The one that is most common is `Box<T>` which roughly corresponds to `std::uniqu
 * What other smart pointers does rust provide?
 * Why is it required that smart pointers in rust cannot be `NULL`?
 * Why do you think `Box<T>` is the most common smart pointer in rust?
+
+## Part 5
+Here, we will delve into collections and iterators in rust.
+
+### Part 5.1 collections.
+Rust's standard library comes with a handful of container data-structures, or *collections* built in.
+
+#### Question 1 
+I'm actually not sure what to do here... It feels weird to ask about how to use data structures when
+it's not that different from anywhere else. For now I'll just drop the [documentation to the rust containers here](https://doc.rust-lang.org/std/collections/index.html). 
+
+### Part 5.2 iterators.
+Every container in rust comes with iterators. 
