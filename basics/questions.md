@@ -897,6 +897,8 @@ Most of the basics one like `vector, hasmap, linked-lists, tree-maps, ` and  `de
 * `HashMap` is well, a `hashmap` - a map or dictionary implemented using a hash-table (`std::unordered_map` in `C++`)
 * `TreeMap` is a `binary-tree-map` - a map or dictionary where the keys are ordered using a linked binary-tree (`std::map` in `C++`)
 
+You can read more about the different data structures on [rust doc collection chapter](https://doc.rust-lang.org/std/collections/).
+
 #### Question 1
 Consider the following code
 ```rust
@@ -924,10 +926,10 @@ int main()
     string_vec.push_back("From");
     string_vec.push_back("Space");
 
-    printf("%s\n", string_vec.at(0));
-    printf("%s\n", string_vec.at(4));
-    printf("%s\n", string_vec[0]);
-    printf("%s\n", string_vec[4]);
+    std::cout << string_vec.at(0) << std::endl;
+    std::cout << string_vec.at(4) << std::endl;
+    std::cout << string_vec[0] << std::endl;
+    std::cout << string_vec[4] << std::endl;
 }
 ```
 * While they look similar, there are significant differences between the rust implementation and the C++ how the code will actually behave, how? (Ignore the fact that I use `printf()` here since I was too lazy to write the `std::cout` version);
@@ -965,3 +967,24 @@ fn main() {
 ### Part 5.2 iterators.
 Every container in rust comes with iterators. Just like how iterators works normally, you can read the next value etc, iterate forwards and iterate back. But here is where the similarities ends.
 In fact, most of the time, rust iterators doesn't really materialize in memory or as instructions until an operation is used that consumes the iterator.
+
+#### Question 3
+
+Just a slight warmup (demo) on a rust iterator, how would you rewrite the following code with a for-loop instead?
+```rust
+
+fn main() {
+    let my_string_vec = vec![
+        "Hello ",
+        "World!\n",
+        "ABCDEF\n",
+    ];
+    
+    let mut it = my_string_vec.iter();
+    while let Some(text) = it.next() {
+        print!("{:?}", text);
+    }
+}
+```
+### Part 5.3 iterator functions
+
