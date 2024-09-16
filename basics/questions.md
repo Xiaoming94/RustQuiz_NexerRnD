@@ -890,10 +890,78 @@ Here, we will delve into collections and iterators in rust.
 
 ### Part 5.1 collections.
 Rust's standard library comes with a handful of container data-structures, or *collections* built in.
+Most of the basics one like `vector, hasmap, linked-lists, tree-maps, ` and  `deque` all exist in some way shape or form.
+* `Vec` is a `vector` (`std::vector` in `C++`)
+* `LinkedList` is a `linkedlist` (`std::list` in `C++`)
+* `VecDeque` is a `deque` or a double-ended-queue (`std::deque` in `C++`)
+* `HashMap` is well, a `hashmap` - a map or dictionary implemented using a hash-table (`std::unordered_map` in `C++`)
+* `TreeMap` is a `binary-tree-map` - a map or dictionary where the keys are ordered using a linked binary-tree (`std::map` in `C++`)
 
-#### Question 1 
-I'm actually not sure what to do here... It feels weird to ask about how to use data structures when
-it's not that different from anywhere else. For now I'll just drop the [documentation to the rust containers here](https://doc.rust-lang.org/std/collections/index.html). 
+#### Question 1
+Consider the following code
+```rust
+fn main() {
+    let mut string_vec: Vec<&str> = Vec::new();
+
+    string_vec.push("Hello");
+    string_vec.push("World");
+    string_vec.push("From");
+    string_vec.push("Space");
+
+    println!("{:?}", string_vec.get(0));
+    println!("{:?}", string_vec.get(4));
+    println!("{:?}", string_vec[0]);
+    println!("{:?}", string_vec[4]);
+}
+```
+This can roughly be translated to following C++ code
+```C++
+int main()
+{
+    std::vector<std::string_view> string_vec;
+    string_vec.push_back("Hello");
+    string_vec.push_back("World");
+    string_vec.push_back("From");
+    string_vec.push_back("Space");
+
+    printf("%s\n", string_vec.at(0));
+    printf("%s\n", string_vec.at(4));
+    printf("%s\n", string_vec[0]);
+    printf("%s\n", string_vec[4]);
+}
+```
+* While they look similar, there are significant differences between the rust implementation and the C++ how the code will actually behave, how? (Ignore the fact that I use `printf()` here since I was too lazy to write the `std::cout` version);
+    * Keyword: Undefined behaviour
+* Instead of creating a mutable vector, you can create an immutable vector with the same content instead. how?
+
+#### Question 2
+Consider the following code
+
+```rust
+fn main() {
+    struct Pos(u32, u32);
+
+    let my_map = HashMap::from([
+        (Pos(0,0), "Hello"),
+        (Pos(0,1), "My"),
+        (Pos(1,0), "Hash"),
+        (Pos(1,1), "Map"),
+    ]);
+
+    let random_key = Pos(4,2);
+    if let Some(string_at_pos) = my_map.get(random_key) {
+        println!("string_at_pos is: {string_at_pos}");
+    } else {
+        println!("found nothing");
+    }
+}
+```
+* There is one fundamental component missing in this main function to make it compile, what is it?
+* Assuming you fixed the compilation, what will this program printout?
+* Try now adding the new element for `Pos(4,2)` into the hashmap through:
+    * Adding it to the array used in `HashMap::from()`,
+    * Making the map mutable.
 
 ### Part 5.2 iterators.
-Every container in rust comes with iterators. 
+Every container in rust comes with iterators. Just like how iterators works normally, you can read the next value etc, iterate forwards and iterate back. But here is where the similarities ends.
+In fact, most of the time, rust iterators doesn't really materialize in memory or as instructions until an operation is used that consumes the iterator.
