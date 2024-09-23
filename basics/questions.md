@@ -18,7 +18,7 @@ I have yet to check whatever content on rust is available on YouTube.
 People learn differently ofc.
 
 ## Part 1
-This part is meant for whoever is doing this quiz to familiarize with the Rust syntax. 
+This part is meant for whoever is doing this quiz to familiarize with the Rust syntax.
 #### Question 1
 Consider this rust function:
 ```rust
@@ -26,10 +26,10 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
     a + b
 }
 ```
-This function is roughly be translate to this function if written in C++ 
+This function is roughly be translate to this function if written in C++
 ```C++
 //necessary includes
-std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b) 
+std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b)
 {
     return a + b;
 }
@@ -128,7 +128,7 @@ impl MyStruct {
             name: String::from(name),
             age: age,
         }
-    } 
+    }
 }
 
 fn function_with_struct1(arg: MyStruct) {
@@ -194,7 +194,7 @@ fn divide_if_even(arg: u32) -> Option<u32> {
 fn main() {
     let a: u32 = 2;
     let a = a + 4;
-    
+
     //Print 1
     println!("{a}");
 
@@ -378,7 +378,7 @@ Naturally, you can also declare type-aliases through the `type` keyword
 type ChessBoard = HashSet<(u32,u32)>;
 ```
 But Enums and Structs are the two go-to ways to actually create custom made data-types.
-Structs are basically a way to create a compound 
+Structs are basically a way to create a compound
 
 #### Question 5)
 Look carefully at the following code
@@ -394,7 +394,7 @@ mod shapes {
             Rectangle {
                 width: width,
                 height: height,
-            } 
+            }
         }
 
         pub fn area(&self) -> f32 {
@@ -411,7 +411,7 @@ mod shapes {
 * What are the difference between the function `new()` and the functions `area()` and `circumference()`?
 * Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.)
     * Bonus question: Do you **need** a `new()` function to instantiate the struct `Rectangle`?
-* (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for 
+* (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for
     * a *square*?
     * a *circle*? (the constant for PI is available if you add `use std::f32::consts::PI;` before the declaration of Circle);
 
@@ -420,7 +420,7 @@ The code above can also be rewritten like this, using something called a *tuple 
 ```rust
 mod shapes {
     pub struct Rectangle(f32, f32);
-    
+
     impl Rectangle {
         pub fn new(width: f32, height: f32) -> Self {
             Rectangle(width, height)
@@ -435,7 +435,7 @@ mod shapes {
             let Rectangle(width, height) = self;
             2 * (width + height)
         }
-    } 
+    }
 }
 ```
 * What do you think are the pros and cons of a struct defined this way?
@@ -490,13 +490,13 @@ impl Shape {
     }
 
     fn circle_area(radius: f32) -> f32 {
-        radius * PI.pow(2) 
+        radius * PI.pow(2)
     }
 
     fn rectangle_area(width: f32, height: f32) -> f32 {
         width * height as f32
-    } 
-} 
+    }
+}
 ```
 
 This implementation is not really ideal... but ignore it for now.
@@ -563,7 +563,7 @@ The concept of traits is kinda in it's name, that the type has a certain charact
 In terms of programming, rust's traits can be thought of as something similar to interfaces.
 
 #### Question 1
-Let's implement geometrical shapes using a trait instead 
+Let's implement geometrical shapes using a trait instead
 ```rust
 trait Shape {
     fn shape_name();
@@ -660,7 +660,7 @@ impl Add for Coord {
     }
 }
 ```
-* What is the operation defined by the `Add<Rhs = Self>` trait? 
+* What is the operation defined by the `Add<Rhs = Self>` trait?
     * What is the meaning of `<Rhs = Self>` in the declaration of this trait?
     * How can you define the same operation with a different (Rhs) type?
 
@@ -697,7 +697,7 @@ fn sort<T: Ord> (list: Vec<T>) -> Vec<T> {
 Another way to use traits together with generics can be done with the `where` clause:
 ```rust
 fn perform_task<T,F>(value: T, fun: F)
-where 
+where
     T: Add + Mul + Debug,
     F: Fn(T) -> T {
    // Do something
@@ -736,7 +736,7 @@ Here we will explore how rust accomplishes this.
 Move semantics is one certain data's ownership is transfered to another scope. In C/C++, this is mostly accomplished through the use of `std::move()`.
 In rust, moving objects is the default behaviour for custom data-types (structs/enums).
 
-#### Question 1 
+#### Question 1
 Consider the following snippet of code:
 ```rust
 #[derive(Debug)]
@@ -863,7 +863,7 @@ fn main() {
         position = Pos(0,0),
         name = "King",
     };
-    let current_pos = my_piece.get_position(); 
+    let current_pos = my_piece.get_position();
     my_piece.set_position(current_pos);
 }
 ```
@@ -970,7 +970,7 @@ In fact, most of the time, rust iterators doesn't really materialize in memory o
 
 #### Question 3
 
-Just a slight warmup (demo) on a rust iterator, how would you rewrite the following code with a for-loop instead?
+Just a slight warmup (demo) on a rust iterator.
 ```rust
 
 fn main() {
@@ -979,12 +979,87 @@ fn main() {
         "World!\n",
         "ABCDEF\n",
     ];
-    
+
     let mut it = my_string_vec.iter();
-    while let Some(text) = it.next() {
+    while let Some(&text) = it.next() {
         print!("{:?}", text);
     }
 }
 ```
-### Part 5.3 iterator functions
+* What do you think this program will output?
+* how would you rewrite the following code with a for-loop instead?
 
+### Part 5.3 iterator functions and functional programming
+
+Perhaps the most common usecase for iterators is to perform operations on each elements in the container.
+All containers implements the [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) and thus have most of these functions defined.
+
+#### Question 4
+
+Consider the following code:
+```rust
+// Type1 and Type2 defined prior
+
+fn is_even(num: u32) -> bool {
+    num % 2 == 0
+}
+
+fn raise_to_pow2(num: u32) -> u32 {
+    num * num
+}
+
+fn main() {
+    let vec_of_type2: Vec<u32> = vec_of_type1
+        .into_iter()
+        .filter(check_condition)
+        .map(transform_operation)
+        .collect();
+}
+```
+
+* What do you think is the effect of this code? (i.e. what will be inside `vec_of_type2`);
+* What do you think is the roughly equivalent code in
+    * rust (using a for loop)?
+    * C++ ?
+    * Your favorite programming language?
+* Can you use the iterator again after the call to `.collect()`?
+    * What other functions have similar effect as `collect()` with regards to the iterators lifetime?
+* Are you able to use the vector again in `main()` ?
+
+#### Question 5
+
+Consider the following rust code:
+```rust
+//Type1, Type2, and Type3 declared above with relevant traits
+
+fn check_condition(obj: &Type2) -> bool {
+    // Some condition checking
+}
+
+fn create_type3(obj: &Type2) -> Type3 {
+    // Create a type3 based on objs data somehow
+}
+
+fn main() {
+    let mut map_to_dups: TreeMap<Type3, u32>;
+    for num in 0..=100.into_iter() {
+        let type2_obj = Type2::from(Type1::new(num));
+        if check_condition(&type2_obj) {
+            let type3_obj = create_type3(type2_obj);
+            map_to_dups
+                .entry(type3_obj)
+                .and_modify(|dups| *dups += 1)
+                .or_insert(0);
+        }
+    }
+}
+```
+
+* How would you re-write this using iterators?
+* Compared to the for-loop, which one is faster?
+* Which one do you consider more readable?
+* What is the biggest benefit of the iterator implementation with respect to `map_to_dups`? (hint, mutability)
+
+## CONGRATULATION YOU HAVE REACHED THE FINISHLINE!
+
+I hope you at least had a good time... if there are some feedbacks, please don't hesitate to tell me somehow :)
