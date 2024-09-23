@@ -932,7 +932,7 @@ int main()
     std::cout << string_vec[4] << std::endl;
 }
 ```
-* While they look similar, there are significant differences between the rust implementation and the C++ how the code will actually behave, how? (Ignore the fact that I use `printf()` here since I was too lazy to write the `std::cout` version);
+* While they look similar, there are significant differences between the rust implementation and the C++ how the code will actually behave, how?
     * Keyword: Undefined behaviour
 * Instead of creating a mutable vector, you can create an immutable vector with the same content instead. how?
 
