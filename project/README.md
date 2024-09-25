@@ -62,3 +62,27 @@ You can read more about how `cargo add` works in the [documentation](https://doc
 Also, on the first build, there will also be a `Cargo.lock` file created in your crate. **You don't want to add it to gitignore** because that file is important for consistent dependency management.
 See [ Cargo.toml vs Cargo.lock ](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) for more info.
 
+### Building and executing your code.
+
+Cargo has various commands defined to both compile and build, and executing the program itself or running the test.
+All possible cargo commands can be found by executing `cargo --list`.
+For this section, Instead of going through all of them, I will talk about how to build and execute your code in a cargo project.
+
+* Compiling your code.
+`$ cargo build`
+  In most cases, this will do the trick.
+  Important to know though that by default `$ cargo build` creates a developer build of your code.
+  What this means is that the code will have no compile-time optimizations done to
+  * Make the code compilation faster
+  * To make debugging (through something like gdb) easier
+  If you want to compile a release build of your code, run `$ cargo build --release`
+
+* Executing your code
+`$ cargo run`
+    While in most projects, this should be enough, if you for some reason have multiple binaries defined for this project, you have to specify which binary you want to execute through `--bin <binary name>`.
+    This command will also compile your code if changes are made. If this is not desired, you can also just execute the binary manually.
+
+* Executing your tests
+`$ cargo test`
+    This will execute all tests. We will talk more about writing tests in rust later on :)
+
