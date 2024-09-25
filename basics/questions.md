@@ -869,9 +869,59 @@ fn main() {
 ```
 * Curiously, this one will actually fail to compile, why?
     * (Optional) Discussion question: how can you make this file compile?
+* How can you "release" the referenced that has been borrowed?
 * (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, why isn't it used in this example?
 
-### Part 4.3 The Box<T> smart pointer
+### Part 4.3 Runtime borrow checking and interior mutability
+If you figured out what borrowing and borrowing-checking is from previous questions,
+you probably realised that while it's purpose is good (basically stopping references from becoming invalid amongs others - preventing the undefined behaviours that can arise from using an invalid reference)
+It can be a headache to design around due to habits you learned from working with other programming languages like Java or C++.
+
+While most of the cases you run into a compile-time borrow check issue, you should instead think about the structure of your code and what the public interface of the exported code should be.
+In fact, most cases you can rely on the fact that public interfaces in rust are not just the objects like it is in the object-oriented languages.
+The functions provided by the *modules* are part of it as well.
+
+Although, because of how mutability is dependent on the bindings/context instead of being controlled by the type like it is traditionally (for instance in C++ and Java),
+you will run into situations where you desire that only parts of your object should be mutable - like for instance in smart-pointers (see part 4.4).
+This is where interior mutability comes in.
+
+#### Question 6
+Consider the following code:
+```rust
+mod Chess {
+    pub enum ChessPieceType {
+        Rock,
+        Queen,
+        //... etc
+    }
+
+    pub struct Piece {
+        type: ChessPieceType,
+        pos: RefCell<(u32, u32)>,
+    }
+
+    impl Piece {
+        pub fn move_chess_piece(&self, new_position: &(u32, u32)) -> Result<(),bool> {
+            if self.valid_position() {
+                let (newx, newy) = new_position;
+                {
+                    let mut current_pos = pos.borrow_mut();
+                    *current_pos.0 = newx;
+                    *current_pos.1 = newy;
+                }
+                Ok()
+            } else {
+                Err(false)
+            }
+        }
+    }
+}
+```
+* What can you spot as some direct benefits of using the `RefCell` type here?
+* Except for partial mutability, what other issue do you think that this solves?
+* What other types in rust also provides interior mutability, and what are their usecases?
+
+### Part 4.4 The Box<T> smart pointer
 In rust, typically you are not allowed to do manual memory management and pointer operations out of the box.
 This includes for instance manually allocating memory on the heap, dereferencing a raw-pointer, or anything that can trigger undefined behaviour.
 If these operations are required for some reason, the code block and functions has to be declared as `unsafe`.
