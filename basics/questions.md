@@ -877,7 +877,7 @@ If you figured out what borrowing and borrowing-checking is from previous questi
 you probably realised that while it's purpose is good (basically stopping references from becoming invalid amongs others - preventing the undefined behaviours that can arise from using an invalid reference)
 It can be a headache to design around due to habits you learned from working with other programming languages like Java or C++.
 
-While most of the cases you run into a compile-time borrow check issue, you should instead think about the structure of your code and what the public interface of the exported code should be.
+In most of the cases you run into a compile-time borrow check issue, you should instead think about the structure of your code and what the public interface of the exported code should be.
 In fact, most cases you can rely on the fact that public interfaces in rust are not just the objects like it is in the object-oriented languages.
 The functions provided by the *modules* are part of it as well.
 
