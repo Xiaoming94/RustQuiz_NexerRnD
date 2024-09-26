@@ -86,3 +86,43 @@ For this section, Instead of going through all of them, I will talk about how to
 `$ cargo test`
     This will execute all tests. We will talk more about writing tests in rust later on :)
 
+## Rust source code structure
+
+There are some good rule of thumbs to understand how to divide your code into multiple files.
+1) Every source file is it's own module with the name corresponding to it's name.
+    - Also important, they have to be declared.
+2) Every directory with a `mod.rs` is also a module with the code written in `mod.rs`.
+    - These also have to be declared from the parent.
+3) If there exists a directory with a matching name to a `.rs` source file, then any `.rs` sourcefile in that directory has to be declared as modules (with the corresponding name) and are thus submodules.
+    - Same applies if the module is created using a `mod.rs` file in the directory name.
+
+The reason for each file having to be declared as modules for it to be visible and compiled is because cargo doesn't try to compile unused files, 2nd of all it also aids in organizing the code.
+
+### A simple explaination of modules and module declarations
+As an example of what this means. Consider this structure in `src/` for some binary crate
+```
+src/
+|- main.rs
+|- backend.rs
+|- backend/
+    |- cruddata.rs
+|- bridge/
+    |- mod.rs
+    |- requesthelpers.rs
+```
+
+For the code from `backend.rs` to be visible and compiled by cargo, you have to declare it as a module `main.rs`.
+The `cruddata.rs` file is by default invisible to cargo. However by declaring `cruddata` as a module in `backend.rs` makes it so that the code inside `cruddata.rs` can be used.
+
+So when it comes to the files in `bridge/` the module `bridge` has to be declared in `main.rs` and thus the same ideas from the previous sentence is applied.
+Note that here, the `bridge.rs` file is not needed, since the main modules code is now placed inside the `mod.rs` file.
+
+### Visibility
+
+We can talk forever about visibility, but in general, any module importing another module have access to the functions and types inside that modules that are declared as `pub`.
+So if `backend.rs` has a function `pub fn connect_to(target: IpAddress) -> ConStatus` and `fn check_connection_certs(target: IpAddress) -> Result<CertType, &str>`, then only `connect_to` is visible when importing `backend` through `use backend`.
+
+Worth pointing out also is that if an import is declared as `pub use amodule::asubmod` then asubmod is also re-exported by the file including the line. (This also applies when you use `pub mod`).
+
+There are more things you can do to control the visibility of a module and it's functions and types.
+You can read about it in [ rust documentation about visibility and privacy ](https://doc.rust-lang.org/reference/visibility-and-privacy.html).
