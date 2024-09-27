@@ -242,4 +242,7 @@ As thus, you can always implement your own mock structs that implements the trai
 There are crates also that provides mockability. But the basics of mocking something in a test-environment in rust is like described here.
 
 When it comes to expect_calls, one of the crates that provides mocking - `mockall` also provides expect calls.
-A general advice here is that you shouldn't really worry about expect_calls unless you have to, because the test is for verifying and protecting the expected effect of your code, not your implementation.
+A general advice here is that you shouldn't overly rely on expect_calls to verify your code -> i.e. expect a certain order of function calls.
+Tests are for verifying and protecting the expected effect of your code, not your implementation.
+However, if the expected effect is that a certain function is called (maybe with a certain set of parameters).
+One such case is for instance if your program is for operating a drill, then at the end of your test, you should expect a call to the drill doing the drilling happening.
