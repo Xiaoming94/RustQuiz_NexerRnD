@@ -223,15 +223,16 @@ The submodule `calculatortest` will only be compiled and the tests executed if y
 There are some in discussion convention about how to organize your tests.
 But there seem to be a concensus that unit-tests should be contained within a submodule annotated with `#[cfg(test)]` to the module that is being tested.
 *Technically* same goes for integration test.
-But the general difference between integration and unit-tests only boils down to two points:
+
+Tips: If you want your tests to be placed inside a separate sourcefile, then this can be achieved through the use of `#[cfg(test)]` and declaring the module.
+This is because test modules also play by the same rule of sourcefile to module relation discussed earlier.
+
+Footnote: General difference between integration and unit-tests only boils down to two points:
 * If a test is written solely to test the current module where external dependencies are *mocked*, then it's a unit-test
 * If a test uses the actual real components from different modules, then it's an integration test.
 (btw, these are the universal definitions of these terms)
 
 With regards to End-to-end tests - that really depends on how your program is supposed to be interacted with.
-
-Tips: If you want your tests to be placed inside a separate sourcefile, then this can be achieved through the use of `#[cfg(test)]` and declaring the module.
-This is because test modules also play by the same rule of sourcefile to module relation discussed earlier.
 
 ### Mocking and Expect calls.
 Due to the fact that rust lacks inheritance, mocking can initially feel a bit unintuitive.
