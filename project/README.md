@@ -152,6 +152,36 @@ These are defined such that `assert_eq!(val1, val2) ==> assert!(val1 == val2)`.
 But while `assert_eq!()` is meant for verifying equivalence, while `assert!()` is for verifying any boolean expectation.
 If used outside a function annotated with `#[test]`, `assert!()` will trigger if the assertion fails during runtime.
 
+### Recommended crates for testing
+One crate I will definitely recommend is the `googletest` crate.
+It provides more advanced verification macros and matchers that can be used to make your test more flexible.
+
+One such example the test above `test_add()` can be rewritten using googletest macros as:
+
+```rust
+use googletest::prelude::*; //imports the important components from GoogleTest
+
+#[test]
+fn test_add() {
+    assert_that!(add_two_numbers(3,2), eq(5)); //Uses the eq matcher
+}
+```
+It also adds googletest style expectations -> I.e. asserts that doesn't block the execution of the rest of the test.
+
+```rust
+use googletest::prelude::*;
+
+#[gtest]
+fn test_add_with_expects() {
+    expect_that!(add_two_numbers(4,4), eq(7)); //Will not block the next line
+    assert_that!(add_two_numbers(3,2), eq(5));
+}
+```
+
+There is alot more useful functionality that googletest provides. You can read more about it in the [googletest rust documentation](https://docs.rs/googletest/latest/googletest/index.html) including how you can write your own matchers!!
+
+There is also `rstest` that provides some more additional stuff such as `test_fixtures`.
+
 ### Organizing your tests
 It is adviced that all the test should be contained within a module that is annotated with `#[cfg(test)]`.
 
@@ -187,7 +217,6 @@ mod calculatortest {
         assert_eq!(divide(num, denom).unwrap(), 2);
     }
 }
-
 ```
 
 The submodule `calculatortest` will only be compiled and the tests executed if you run `$ cargo test`.
@@ -200,3 +229,16 @@ But the general difference between integration and unit-tests only boils down to
 (btw, these are the universal definitions of these terms)
 
 With regards to End-to-end tests - that really depends on how your program is supposed to be interacted with.
+Tips: If you want your tests to be placed inside a separate sourcefile, then this can be achieved through the use of `#[cfg(test)]` and declaring the module.
+This is because test modules also play by the same rule of sourcefile to module relation discussed earlier.
+
+### Mocking and Expect calls.
+Due to the fact that rust lacks inheritance, mocking can initially feel a bit unintuitive.
+However, something that is taught in object-oriented programming is that usually, the code should interact with an interface, not a concrete type.
+
+The equivalence to interfaces in rust is, ofc, traits.
+As thus, you can always implement your own mock structs that implements the trait the functions in your module are expected to interact with.
+There are crates also that provides mockability. But the basics of mocking something in a test-environment in rust is like described here.
+
+When it comes to expect_calls, one of the crates that provides mocking - `mockall` also provides expect calls.
+A general advice here is that you shouldn't really worry about expect_calls unless you have to, because the test is for verifying and protecting the expected effect of your code, not your implementation.
