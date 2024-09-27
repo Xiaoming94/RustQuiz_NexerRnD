@@ -126,3 +126,77 @@ Worth pointing out also is that if an import is declared as `pub use amodule::as
 
 There are more things you can do to control the visibility of a module and it's functions and types.
 You can read about it in [ rust documentation about visibility and privacy ](https://doc.rust-lang.org/reference/visibility-and-privacy.html).
+
+## Writing your test
+
+The rule of thumb in cargo is that any function that is declared with the `#[test]` annotation is a test.
+So for instance:
+
+```rust
+fn add_two_numbers(val1: u32, val2: u32) -> u32 {
+    val1 + val2
+}
+
+#[test]
+fn test_add() {
+    assert_eq!(add_two_numbers(3, 2), 5);
+}
+```
+The function `test_add()` will only be compiled and exectued by cargo through `cargo test`.
+In addition to `#[test]`, rust also provides some other annotations for things like if a panic (I.e. calling the function with certain input will trigger a controlled crash, a panic) is expected etc.
+
+### Verification
+By default, cargo only provides two built in *macros* for verification: `assert!(expr)` and `assert_eq!(val1, val2)`.
+These are defined such that `assert_eq!(val1, val2) ==> assert!(val1 == val2)`.
+
+But while `assert_eq!()` is meant for verifying equivalence, while `assert!()` is for verifying any boolean expectation.
+If used outside a function annotated with `#[test]`, `assert!()` will trigger if the assertion fails during runtime.
+
+### Organizing your tests
+It is adviced that all the test should be contained within a module that is annotated with `#[cfg(test)]`.
+
+So for example I have this code in the module `mod calculator`.
+
+```rust
+
+fn add_two_numbers(val1: u32, val2: u32) -> u32 {
+    val1 + val2
+}
+
+fn divide(numerator: u32, denominator: u32) -> Result<u32, &str> {
+    if denominator == 0 {
+        return Err("Divide by Zero");
+    }
+
+    numerator / denominator
+}
+
+#[cfg(test)]
+mod calculatortest {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        let (input1, input2) = (1,2);
+        assert_eq!(add_two_numbers(input1, input2), input1 + input2);
+    }
+
+    #[test]
+    fn test_divide() {
+        let (num, denom) = (2,1);
+        assert_eq!(divide(num, denom).unwrap(), 2);
+    }
+}
+
+```
+
+The submodule `calculatortest` will only be compiled and the tests executed if you run `$ cargo test`.
+There are some in discussion convention about how to organize your tests.
+But there seem to be a concensus that unit-tests should be contained within a submodule annotated with `#[cfg(test)]` to the module that is being tested.
+*Technically* same goes for integration test.
+But the general difference between integration and unit-tests only boils down to two points:
+* If a test is written solely to test the current module where external dependencies are *mocked*, then it's a unit-test
+* If a test uses the actual real components from different modules, then it's an integration test.
+(btw, these are the universal definitions of these terms)
+
+With regards to End-to-end tests - that really depends on how your program is supposed to be interacted with.
