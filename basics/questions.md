@@ -41,7 +41,9 @@ std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b)
 ```
 
 * From this snippet alone, what do you think is the `fn` part in the rust code?
+**ANSWER:** Keyword for function declaration.
 * What is to the right of the `->` charcters?
+**ANSWER:** Return type of the function (in this case, it's 32bit unsigned int).
 
 #### Question 2
 To spice things up a bit, lets add some prints. Lets add some additional operations in the `add_two_numbers` function in rust.
@@ -55,12 +57,39 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
 ```
 
 * Why is there an exclaimation mark in the `println!()` function?
+**ANSWER:** the exclaimation mark is there to signify that `println!()` is a macro. Any macro in rust is called with an exclamation mark.
 * What do you think the `let` keyword means?
+**ANSWER:** There are multiple correct answers to this one. The easy answer is that it declares a variable binding here.
+However, remember that the LHS of `=` in a statement is actually a matching pattern and not just a variable.
+In fact, some rust programmers argue that `let` statements are *syntactic sugar* for a simple match statement, ie:
+```rust
+let ans = a + b;
+//Desugaring:
+match a + b {
+    ans => { //do something
+    }
+}
+```
 * [*This one is harder*] The last part of this function can also be written as `return ans;`
   * What does the semicolon `;` do?
+  **ANSWER:** I like to think that `;` gobbles up the return value of the expression to it's left.
+  Thus any functions that has a line ending with `;` will result in the function returning `()` (or void in C++ terms).
   * Why do you need it if you use `return`?
+  **ANSWER:** You don't, the `return` keyword will ensure that you exit the function and that the value to the rights is returned to the caller
   * What would happen if you used `;` without `return`?
-  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other? (Hint: Look at the next question)
+  **ANSWER:** Nothing
+* [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other? (Hint: Look at the next question)
+  **ANSWER:** While in most cases they are used in similar ways, what `return` does is that it'll make is that you leave the stackframe of the function you called regardless of how deep in the scope the call is.
+  In other words, inside a function, you can write `let variable = { expr };` or `let variable = { expr1; expr2 }` but not `let variable = { return expr; };` in which case the result of `expr` will be returned by the function.
+  However, returning from a function by using no `;` will make it so that the compiler will make sure that no code after that point is dead-code and that all the branches in the logic-tree is covered -
+  which is why it's generally recommended to use `return` for early exit/early returns.
+  How these are supposed to be used is still up for debate, but it seems like it's extremely easy to over use one over the other.
+  For me personally, I have the following convention:
+    * If the function can be written in 1 simple line, then I just return it using no semicolon.
+    * If the last expression of a function is only a variable, use `return ...;`.
+    * If early return from a function, use `return ...;` at that point.
+    * If moving value from 1 scope to the other - for instance advanced initialization - use no semicolon return.
+    * If you want compiler to statically check for eventual dead-code or to make sure that all grounds are covered in the function, use no `;`.
 
 #### Question 3
 
@@ -77,8 +106,11 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
 }
 ```
 * What is this function doing?
+**ANSWER:** Printing the even numbers in the `Vec` container.
 * What is the return type of this function?
+**ANSWER:** `()` or in C++ terms `void`
 * What do you think is going on on the 2nd line of this function?
+**ANSWER:** This is declaring a function inside a function.
 
 This code of block can also be re-written as
 ```rust
@@ -93,7 +125,9 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
 }
 ```
 * What do you think is happened to `is_even`?
+**ANSWER:** Here, it's rewritten as a lambda expression, or a *closure*.
 * [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?
+**ANSWER:** Well, it's up to you.
 
 #### Question 4
 
