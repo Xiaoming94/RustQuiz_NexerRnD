@@ -78,11 +78,37 @@ match a + b {
   **ANSWER:** You don't, the `return` keyword will ensure that you exit the function and that the value to the rights is returned to the caller
   * What would happen if you used `;` without `return`?\
   **ANSWER:** Nothing
-* [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other? (Hint: Look at the next question)
-  **ANSWER:** While in most cases they are used in similar ways, what `return` does is that it'll make is that you leave the stackframe of the function you called regardless of how deep in the scope the call is.
-  In other words, inside a function, you can write `let variable = { expr };` or `let variable = { expr1; expr2 }` but not `let variable = { return expr; };` in which case the result of `expr` will be returned by the function.
-  However, returning from a function by using no `;` will make it so that the compiler will make sure that no code after that point is dead-code and that all the branches in the logic-tree is covered -
-  which is why it's generally recommended to use `return` for early exit/early returns.
+  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other? (Hint: Look at the next question)\
+  **ANSWER:** While in most cases they are used in similar ways, what `return` does is directly jumping out of the stackframe of the function you called regardless of how deep in the scope the call is,
+  while returning a value through omitting `;` will only move it to the scope above.
+  In other words, inside a function, you can write `let variable = { expr };` or `let variable = { expr1; expr2 }` but not `let variable = { return expr; };`.
+  By using `return` in the last code example will result in the function returning the result of `expr`.
+  Returning from a function by omitting `;` will also make sure that the compiler statically ensure that no code after that point is dead-code and that all the branches actually exists.
+  What this also means that
+```rust
+if condition {
+    expr1
+}
+    expr2
+```
+  will not compile. In this case the rust compiler forces the semantic of including an else statement that follows the if.
+```rust
+if condition {
+    expr1
+} else {
+    expr2
+}
+```
+  Do note that
+```rust
+if condition {
+    return expr1;
+}
+
+expr2;
+```
+  will compile.
+  This is why it's generally recommended to use `return` for early exit/early returns.
   How these are supposed to be used is still up for debate, but it seems like it's extremely easy to over use one over the other.
   For me personally, I have the following convention:
     * If the function can be written in 1 simple line, then I just return it using no semicolon.
