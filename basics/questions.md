@@ -85,32 +85,32 @@ match a + b {
   By using `return` in the last code example will result in the function returning the result of `expr`.
   Returning from a function by omitting `;` will also make sure that the compiler statically ensure that no code after that point is dead-code and that all the branches actually exists.
   What this also means that
-  ```rust
-  if condition {
-      expr1
-  }
-      expr2
-  ```
-  will not compile. In this case the rust compiler forces the semantic of including an else statement that follows the if.
-  ```rust
-  if condition {
-      expr1
-  } else {
-      expr2
-  }
-  ```
-  Do note that
-  ```rust
-  if condition {
-      return expr1;
-  }
+    ```rust
+    if condition {
+        expr1
+    }
+        expr2
+    ```
+    will not compile. In this case the rust compiler forces the semantic of including an else statement that follows the if.
+    ```rust
+    if condition {
+        expr1
+    } else {
+        expr2
+    }
+    ```
+    Do note that
+    ```rust
+    if condition {
+        return expr1;
+    }
 
-  expr2;
-  ```
-  will compile.
-  This is why it's generally recommended to use `return` for early exit/early returns.
-  How these are supposed to be used is still up for debate, but it seems like it's extremely easy to over use one over the other.
-  For me personally, I have the following convention:
+    expr2;
+    ```
+    will compile.
+    This is why it's generally recommended to use `return` for early exit/early returns.
+    How these are supposed to be used is still up for debate, but it seems like it's extremely easy to over use one over the other.
+    For me personally, I have the following convention:
     * If the function can be written in 1 simple line, then I just return it using no semicolon.
     * If the last expression of a function is only a variable, use `return ...;`.
     * If early return from a function, use `return ...;` at that point.
