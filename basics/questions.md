@@ -256,7 +256,7 @@ Note:
 Fruit for thought: Rust's strict type-system is one of the reasons why rust is considered to be memory-safe too, Why?
 
 ### Part 2.1 the basics
-Basics of rust type system
+This part is for you to warm-up and getting familiar with some of the basic of rust's type-system.
 
 #### Question 1
 
@@ -295,7 +295,7 @@ int main() {
 ```
 * The rust version of this simple program will actually fail to compile, why?
 * Any suggestion on how to fix it (hint: there are at least 2 ways)?
-* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, why isn't it used in this example?
+* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, what do you think is the difference between these two?
 
 #### Question 2
 Consider the code snippet below
@@ -334,6 +334,7 @@ fn main() {
 
 #### Question 4
 Lets look at some basic type conversion. Consider the followin snippets:
+
 a)
 ```rust
 fn main() {
@@ -378,8 +379,8 @@ Naturally, you can also declare type-aliases through the `type` keyword
 ```rust
 type ChessBoard = HashSet<(u32,u32)>;
 ```
-But Enums and Structs are the two go-to ways to actually create custom made data-types.
-Structs are basically a way to create a compound
+But enums and structs are the two go-to ways to actually create custom made data-types.
+Structs are basically a way to create a compound data structure.
 
 #### Question 5
 Look carefully at the following code
@@ -729,12 +730,22 @@ For now, think of it as something similar to "Pass-by-reference" in C++ or a "no
 * What's the difference between using these two approaches compared to using a generic type?
 * What's the difference between using `dyn` vs `impl`?
 
+#### Question 8
+Now that you have familiarized yourself with the rust type system. Recall that you can define a type-alias using the `type` keyword.
+* When should you use a type-alias instead of making an enum or struct?
+* Can you implement traits for type-aliases?
+* How can you generics and traits with type-aliases?
+
 ## Part 4
-This part is about rust's memory managment and concepts. One of the biggest reason why rust is still matching C/C++ in terms of performance despite being labeled "memory-safe" is because the language doesn't use garbage collection.
-Here we will explore how rust accomplishes this.
+This part is about rust's memory managment and concepts.
+One of the biggest reason why rust is still matching C/C++ in terms of performance despite being labeled "memory-safe" is because the language doesn't use garbage collection.
+One of the key-component to how rusts accomplishes being memory-safe without garbage collection is due to the type-safety guaranteed by it's type-system.
+But, type-safety is only one side of the coin, and in most cases, it's not enough.
+Here we will see the additional memory management component of rust that helps in guaranteeing memory safety
+(most notably, how it avoids situations that would have otherwise been undefined behaviours in C++).
 
 ### Part 4.1 Move Semantics
-Move semantics is one certain data's ownership is transfered to another scope. In C/C++, this is mostly accomplished through the use of `std::move()`.
+Move semantics is when a certain data's ownership is transfered to another scope. In C/C++, this is mostly accomplished through the use of `std::move()`.
 In rust, moving objects is the default behaviour for custom data-types (structs/enums).
 
 #### Question 1
