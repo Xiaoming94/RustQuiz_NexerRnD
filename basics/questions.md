@@ -857,12 +857,14 @@ struct Piece {
 }
 
 impl Piece {
-    pub fn get_position(&self) -> &Position {
+    pub fn get_position(&self) -> &Pos {
         return self.position;
     }
 
-    pub fn set_position(&mut self, pos: Position) {
-        self.position = pos;
+    pub fn set_position(&mut self, pos: &Pos) {
+        let Pos(x, y) = pos;
+        self.position.0 = *x;
+        self.position.1 = *y;
     }
 
     pub fn get_name(&self) -> &String {
@@ -872,8 +874,8 @@ impl Piece {
 
 fn main() {
     let mut my_piece = Piece {
-        position = Pos(0,0),
-        name = "King",
+        position: Pos(0,0),
+        name: "King".into(),
     };
     let current_pos = my_piece.get_position();
     my_piece.set_position(current_pos);
@@ -882,10 +884,28 @@ fn main() {
 * Curiously, this one will actually fail to compile, why?
     * (Optional) Discussion question: how can you make this file compile?
 * How can you "release" the referenced that has been borrowed?
+* At first, borrow checking can be really annoying to work around - it exists for a good purpose. Why is borrow checking enforced in rust?
+Hint: Look at the example below (surrounding code is the same as previous)
+```rust
+impl Piece {
+    // ...
+    pub fn set_position_with_value(&mut self, pos: Pos) {
+        self.position = pos;
+    }
+    // ...
+}
+
+fn main() {
+    // ...
+    // my_piece.set_position(current_pos)
+    my_piece.set_position_with_value(*current_pos); // Will fail compilation with a different borrowcheck
+}
+```
+* There are a couple of rules surrounding references and borrowing that are really good to know about when you are working with rust. What are those?
 
 ### Part 4.3 Runtime borrow checking and interior mutability
 If you figured out what borrowing and borrowing-checking is from previous questions,
-you probably realised that while it's purpose is good (basically stopping references from becoming invalid amongs others - preventing the undefined behaviours that can arise from using an invalid reference)
+you probably realised that while it's purpose is good.
 It can be a headache to design around due to habits you learned from working with other programming languages like Java or C++.
 
 In most of the cases you run into a compile-time borrow check issue, you should instead think about the structure of your code and what the public interface of the exported code should be.
