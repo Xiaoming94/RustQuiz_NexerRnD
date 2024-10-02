@@ -26,7 +26,7 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
     a + b
 }
 ```
-This function is roughly be translate to this function if written in C++
+This function is roughly be translate to this function in C++
 ```C++
 //necessary includes
 std::uint32_t add_two_numbers(std::uin32_t a, std::uint32_t b)
@@ -232,7 +232,7 @@ fn main() {
 * What is the purpose of the `mod` and `pub` keywords?
 * How should you call the function `calc_sum()` from the `main()` function?
 
-## Part2
+## Part 2
 
 This part of the quiz is about rusts' type system.
 Colloquially, rust is described as a **statically typed** language with a **strong type-system** - within the programming language community.
@@ -255,10 +255,10 @@ Note:
 
 Fruit for thought: Rust's strict type-system is one of the reasons why rust is considered to be memory-safe too, Why?
 
-## Part 2.1 the basics
+### Part 2.1 the basics
 Basics of rust type system
 
-#### Question 1)
+#### Question 1
 
 Consider the following code:
 ```rust
@@ -295,8 +295,9 @@ int main() {
 ```
 * The rust version of this simple program will actually fail to compile, why?
 * Any suggestion on how to fix it (hint: there are at least 2 ways)?
+* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, why isn't it used in this example?
 
-#### Question 2)
+#### Question 2
 Consider the code snippet below
 ```rust
 fn unsigned_int_function(arg: u32) -> u32 {
@@ -317,7 +318,7 @@ fn main() {
 * Once again, this code will not compile, why?
 * Any suggestions on how to fix it?
 
-#### Question 3)
+#### Question 3
 Consider this small snippet of code
 ```rust
 fn identity_function<T>(obj: T) -> T{
@@ -329,7 +330,7 @@ fn main() {
 }
 ```
 * What do you think the return type of the function `identity_function()` is?
-* What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a tempalte).
+* What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a template).
 
 #### Question 4
 Lets look at some basic type conversion. Consider the followin snippets:
@@ -380,7 +381,7 @@ type ChessBoard = HashSet<(u32,u32)>;
 But Enums and Structs are the two go-to ways to actually create custom made data-types.
 Structs are basically a way to create a compound
 
-#### Question 5)
+#### Question 5
 Look carefully at the following code
 ```rust
 mod shapes {
@@ -415,7 +416,7 @@ mod shapes {
     * a *square*?
     * a *circle*? (the constant for PI is available if you add `use std::f32::consts::PI;` before the declaration of Circle);
 
-#### Question 6)
+#### Question 6
 The code above can also be rewritten like this, using something called a *tuple struct*:
 ```rust
 mod shapes {
@@ -441,7 +442,7 @@ mod shapes {
 * What do you think are the pros and cons of a struct defined this way?
 * There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how?
 
-#### Question 7)
+#### Question 7
 NOTE: We will actually explore rust Enums through multiple question. While we are at it however, keep in mind of how tuple structs works.
 
 Consider this following example implementation of geometrical shapes.
@@ -870,7 +871,6 @@ fn main() {
 * Curiously, this one will actually fail to compile, why?
     * (Optional) Discussion question: how can you make this file compile?
 * How can you "release" the referenced that has been borrowed?
-* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, why isn't it used in this example?
 
 ### Part 4.3 Runtime borrow checking and interior mutability
 If you figured out what borrowing and borrowing-checking is from previous questions,
