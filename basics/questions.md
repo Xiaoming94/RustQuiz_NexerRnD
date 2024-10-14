@@ -183,7 +183,8 @@ fn main() {
 2 4 2 6
 ```
 * What do you think is happening on Line1 and Line2 of the `main()`?\
-**Answer:** Well, these are the two ways to create a vector from an array, or a *slice* that it is called in rust.
+**Answer:** These are the two ways to create a vector from an array, or a *slice* that it is called in rust. One is through a macro, the other through a `from()` constructor.
+We will explore `from` later on.
 
 #### Question 5
 This question uses a custom defined struct.
@@ -245,8 +246,10 @@ int main() {
 }
 
 ```
-* If you try and compile the rust code, you will notice that the code fails to compile, why?
-* Do you have any suggestions how to fix this? (Don't spend too much time here since we will explore this in later parts)
+* If you try and compile the rust code, you will notice that the code fails to compile, why?\
+**Answer:** Move semantics, check part 4 :)
+* Do you have any suggestions how to fix this? (Don't spend too much time here since we will explore this in later parts)\
+**Answer:** Check part 4, but you can for instance implement `clone` or make it so that `function_with_struct1()` at the very least borrows (i.e. pass by reference) `struct_instance`.
 
 #### Question 6
 Consider this following, slightly larger rust snippet:
