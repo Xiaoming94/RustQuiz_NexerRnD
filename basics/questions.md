@@ -282,11 +282,25 @@ fn main() {
 }
 
 ```
-* What's the console output of this program?
-* What is happening in the first and second `let a` statement?
-    * Btw, you can reproduce the effect of these lines without using the 2nd `let a`, how? (hint: `let mut a = ...;`)
-* What is happening in the `let ...` statement before the 2nd `println!()`?
-* How do you think the `if let ...` statement is evaluated?
+* What's the console output of this program?\
+**Answer:** You can check it in playground or godbolt by copy-pasting it. Should be something in the line of
+```
+6
+Var1 : 7, Var2 : 8
+Half of 6 is: 3
+```
+* What is happening in the first and second `let a` statement?\
+**Answer:** In rust, you can declare a new variable with the same name as something that already exists, this is called shadowing.
+    * Btw, you can reproduce the effect of these lines without using the 2nd `let a`, how? (hint: `let mut a = ...;`)\
+    **Answer:**
+        ```rust
+        let mut a = 2;
+        a += 4 //No shadowing happens here.
+        ```
+* What is happening in the `let ...` statement before the 2nd `println!()`?\
+**Answer:** You are binding the output from `tuple_function` to two variables inside the Left-hand-side tuple (the paranthesis) `var1` and `var2`. This is called pattern-matching or pattern de-structuring. In C++, a similar feature exists called structured binding.
+* How do you think the `if let ...` statement is evaluated?\
+**Answer:** In contrast to how it works in C++ (i.e. the variable has to be anything but 0 to be evaluated to true), if-let statements in rust will be evaluated to true if the RHS value is successfully bound to the pattern on the LHS. This, btw, is also true to how `match` works.
 
 The code before the last print is related to the `Option<>` type, which is an `enum`.
 Enums in rust will be explored later.
@@ -304,8 +318,10 @@ fn main() {
     // Do something?
 }
 ```
-* What is the purpose of the `mod` and `pub` keywords?
-* How should you call the function `calc_sum()` from the `main()` function?
+* What is the purpose of the `mod` and `pub` keywords?\
+**Answer:** `mod` declares a module, `pub` makes the function public - i.e. exports it from the module. This question is only meant to make you aware of modules and function exports. Understanding and using exports and modules are going to be very useful for you when you are working in rust ;)
+* How should you call the function `calc_sum()` from the `main()` function?\
+**Answer:** Use the full qualifier name `util::calc_sum(param)`. You can also import it locally in `main()` before using it through `use util::calc_sum`. Btw, this will not work without the `pub` declaration for `calc_sum()`.
 
 ## Part 2
 
