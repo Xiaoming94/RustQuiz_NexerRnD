@@ -150,9 +150,9 @@ fn print_even_numbers(numbers_vec: Vec<i32>)
     }
 }
 ```
-* What do you think is happened to `is_even`?
+* What do you think is happened to `is_even`?\
 **ANSWER:** Here, it's rewritten as a lambda expression, or a *closure*.
-* [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?
+* [*Discussions/thinking*] What is the benefit of this syntax compared to the previous one?\
 **ANSWER:** Well, it's up to you.
 
 #### Question 4
@@ -176,8 +176,14 @@ fn main() {
     print_even_numbers(more_numbers);
 }
 ```
-* What will this program print to the command line?
-* What do you think is happening on Line1 and Line2 of the `main()`?
+* What will this program print to the command line?\
+**Answer:** It should be something like this:
+```
+4 6 2 6 8
+2 4 2 6
+```
+* What do you think is happening on Line1 and Line2 of the `main()`?\
+**Answer:** Well, these are the two ways to create a vector from an array, or a *slice* that it is called in rust.
 
 #### Question 5
 This question uses a custom defined struct.
