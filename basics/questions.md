@@ -296,7 +296,7 @@ int main() {
 ```
 * The rust version of this simple program will actually fail to compile, why?
 * Any suggestion on how to fix it (hint: there are at least 2 ways)?
-* (Optional) Bonus question: we have seen previously that a string can also be represented by the type `str`, what do you think is the difference between these two?
+* (Optional) Bonus question: we have seen previously that a string can be represented by the types `str` and `String`, what do you think is the difference between these two?
 
 #### Question 2
 Consider the code snippet below
