@@ -384,9 +384,12 @@ int main() {
 }
 
 ```
-* The rust version of this simple program will actually fail to compile, why?
-* Any suggestion on how to fix it (hint: there are at least 2 ways)?
-* (Optional) Bonus question: we have seen previously that a string can be represented by the types `str` and `String`, what do you think is the difference between these two?
+* The rust version of this simple program will actually fail to compile, why?\
+**Answer:** the types `&str` and `String` are different types, and rust cannot implicitly convert between them, unless you want it to.
+* Any suggestion on how to fix it (hint: there are at least 2 ways)?\
+**Answer:** You either make it so that both functions take `&str`. You can also change the 2nd call through type conversion -> In fact, this is what the compiler will tell you to do.
+* (Optional) Bonus question: we have seen previously that a string can be represented by the types `str` and `String`, what do you think is the difference between these two?\
+**Answer:** You can probably find way better answers on the internet, but general gist is that `String` is a pointer to a string object on the heap - as thus, it's an object you can own without any hassle. `str` (and `&str` for that matter) are more similar to a string literal on the stack. In fact, if you try to compile a program using only `str` compiler will tell you that it needs to know the actual length of the `str` while `&str` doesn't really require that since it itself is just a borrowed view to an immutable string that exists somewhere in memory. More on memory, Ownerships etc comes later.
 
 #### Question 2
 Consider the code snippet below
