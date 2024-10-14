@@ -55,7 +55,7 @@ fn add_two_numbers(a: u32, b: u32) -> u32 {
   * What does the semicolon `;` do?
   * Why do you need it if you use `return`?
   * What would happen if you used `;` without `return`?
-  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other (Hint: Look at the next question)?
+  * [*Discussion/thinking*] Why does rust have 2 different ways of returning something from a function? When should you use one or the other? (Hint: Look at the next question)
 
 #### Question 3
 
@@ -927,7 +927,7 @@ mod Chess {
     }
 
     pub struct Piece {
-        type: ChessPieceType,
+        piecetype: ChessPieceType,
         pos: RefCell<(u32, u32)>,
     }
 
@@ -936,11 +936,9 @@ mod Chess {
             if self.valid_position() {
                 let (newx, newy) = new_position;
                 {
-                    let mut current_pos = pos.borrow_mut();
-                    *current_pos.0 = newx;
-                    *current_pos.1 = newy;
+
                 }
-                Ok()
+                Ok(())
             } else {
                 Err(false)
             }
@@ -1092,8 +1090,8 @@ fn raise_to_pow2(num: u32) -> u32 {
 fn main() {
     let vec_of_type2: Vec<u32> = vec_of_type1
         .into_iter()
-        .filter(check_condition)
-        .map(transform_operation)
+        .filter(is_even)
+        .map(raise_to_pow2)
         .collect();
 }
 ```
