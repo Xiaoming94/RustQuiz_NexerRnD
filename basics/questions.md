@@ -101,6 +101,7 @@ fn print_even_numbers(numbers_vec: Vec<i32>) {
             print!("{number} ");
         }
     }
+    println!("");
 }
 
 fn main() {
