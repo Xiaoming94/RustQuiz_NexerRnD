@@ -68,8 +68,8 @@ Cargo has various commands defined to both compile and build, and executing the 
 All possible cargo commands can be found by executing `cargo --list`.
 For this section, Instead of going through all of them, I will talk about how to build and execute your code in a cargo project.
 
-* Compiling your code.
-`$ cargo build`
+* **Compiling your code:**\
+`$ cargo build`\
   In most cases, this will do the trick.
   Important to know though that by default `$ cargo build` creates a developer build of your code.
   What this means is that the code will have no compile-time optimizations done to
@@ -77,14 +77,40 @@ For this section, Instead of going through all of them, I will talk about how to
   * To make debugging (through something like gdb) easier
   If you want to compile a release build of your code, run `$ cargo build --release`
 
-* Executing your code
-`$ cargo run`
+* **Executing your code.**\
+`$ cargo run`\
     While in most projects, this should be enough, if you for some reason have multiple binaries defined for this project, you have to specify which binary you want to execute through `--bin <binary name>`.
     This command will also compile your code if changes are made. If this is not desired, you can also just execute the binary manually.
 
-* Executing your tests
-`$ cargo test`
+* **Executing your tests.**\
+`$ cargo test`\
     This will execute all tests. We will talk more about writing tests in rust later on :)
+
+* **Code formatting.**\
+`$ cargo fmt`\
+    Yes, rust comes with it's own code-formatter. This can be executed through `cargo fmt`. Btw, apart from formatting your code, it can also correct variables/function names qualifiers used in your code according to the configuration in the crate.\
+    By default, the rust formatting is configured to follow these conventions (I don't know whether these are community agreed or just a default):
+    * `snake_case` for variable and function names
+    * `lowercasename` for modules
+    * `CamelCase` (capital first letter) for types and enum values.
+    * Block indentation (This is the indentation convention from Javascript and Python):
+    ```rust
+    mod mymodule {
+        fn function_name(
+            arg1: Type1,
+            arg2: Type2,
+            //...
+            lastarg: Type3,
+        ) -> ReturnType {
+            let my_vec = !vec[
+                (value1, 1u32),
+                (value2, 2u32),
+                //...
+                (lastval, 1337u32),
+            ];
+        }
+    }
+    ```
 
 ## Rust source code structure
 
