@@ -330,7 +330,7 @@ fn main() {
     println!("{:?}", identity_function(1337));
 }
 ```
-* What do you think the return type of the function `identity_function()` is?
+* What do you think the return type of the function `identity_function()` is when it's being called inside `main()` ?
 * What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a template).
 
 #### Question 4
@@ -532,7 +532,7 @@ fn area(geometric_shape: Shapes) -> f32 {
 ```
 * How would you instantiate a shape this way?
 * How would you implement the function `area()` here?
-    * Using `let if`
+    * Using `if let`
     * Using `match`
 
 #### Question 9
@@ -547,8 +547,8 @@ enum Shapes {
 impl Shapes {
     fn area(&self) -> f32 {
         match *self {
-            Circle(radius) => f32 * PI.pow(2),
-            Rectangle(width, height) => width * height,
+            Shapes::Circle(radius) => f32 * PI.pow(2),
+            Shapes::Rectangle(width, height) => width * height,
         }
     }
 }
@@ -921,6 +921,8 @@ This is where interior mutability comes in.
 Consider the following code:
 ```rust
 mod Chess {
+
+    type Position = (u32, u32)
     pub enum ChessPieceType {
         Rock,
         Queen,
@@ -933,11 +935,13 @@ mod Chess {
     }
 
     impl Piece {
-        pub fn move_chess_piece(&self, new_position: &(u32, u32)) -> Result<(),bool> {
-            if self.valid_position() {
-                let (newx, newy) = new_position;
+        pub fn move_chess_piece(&self, new_position: &Position) -> Result<(),bool> {
+            if self.valid_position(new_position) {
+                let (newx, newy) = *new_position;
                 {
-
+                    let mut current_pos = self.pos.borrow_mut();
+                    current_pos.0 = newx;
+                    current_pos.1 = newy;
                 }
                 Ok(())
             } else {
