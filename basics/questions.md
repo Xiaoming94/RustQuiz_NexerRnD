@@ -653,9 +653,9 @@ Another example of a trait is the `Add<Rhs = Self>` trait.
 ```rust
 struct Coord(i32, i32);
 
-type Output = Self
-
 impl Add for Coord {
+    type Output = Self;
+
     fn add(self, rhs: Self::Other) -> Self::Output {
         let Self(x1, y1) = self;
         let Self(x2, y2) = rhs;
@@ -703,6 +703,8 @@ fn perform_task<T,F>(value: T, fun: F)
 where
     T: Add + Mul + Debug,
     F: Fn(T) -> T {
+        //Do something
+    }
    // Do something
 }
 ```
