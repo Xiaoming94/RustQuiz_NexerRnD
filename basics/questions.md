@@ -7,6 +7,11 @@ I've decided to divide these questions into parts.
 A tip from my end when you are working your way through the quiz, if there are code you want to try and execute yourself,
 Rust is supported on [godbolt](https://godbolt.org/).
 You can also try your code in the [rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021)
+I highly recommend that you work your way through the problems using one of these two, and REALLY try to make the code snippets compile! :)
+
+If you are using godbolt, it will complain about the `main` function being unused (as a warning),
+you can ignore it since the way to supress the warning is to declare the main function as `pub fn main()`.
+Rust however doesn't require the main function to be declared as `pub fn`, so you can just ignore that warning.
 
 Most things here are google-able. In fact, the idea is for you to lookup whatever you need while doing the questions.
 The layout of parts etc is loosely based on a course from udemy.
