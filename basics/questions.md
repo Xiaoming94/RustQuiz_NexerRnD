@@ -1146,7 +1146,7 @@ fn main() {
 }
 ```
 
-* How would you re-write this using iterators?
+* How would you re-write this function using iterator functions (i.e like in Question 4)?
 * Compared to the for-loop, which one is faster?
 * Which one do you consider more readable?
 * What is the biggest benefit of the iterator implementation with respect to `map_to_dups`? (hint, mutability)
