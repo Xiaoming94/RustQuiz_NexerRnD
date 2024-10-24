@@ -409,8 +409,13 @@ fn main() {
     //...
 }
 ```
-* Once again, this code will not compile, why?
-* Any suggestions on how to fix it?
+* Once again, this code will not compile, why?\
+**Answer:** Type mis-match. This happens because unlike in C (and C++), unsigned and signed integers are not freely implicitly castable to each other. In more details: initially, `my_var` doesn't really have a type. After the first call to `unsigned_int_function()` the type of `my_var` will be infered to be `u32`. In which case the types will mismatch when `signed_int_function()` is called.
+* Any suggestions on how to fix it?\
+**Answer:** If you play around in godbolt you might come up with somethign, for instance, you can just use `as`:
+    ```rust
+    let results2 = signed_int_function(my_var as i32);
+    ```
 
 #### Question 3
 Consider this small snippet of code
@@ -423,8 +428,11 @@ fn main() {
     println!("{:?}", identity_function(1337));
 }
 ```
-* What do you think the return type of the function `identity_function()` is when it's being called inside `main()` ?
-* What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a template).
+* What do you think the return type of the function `identity_function()` is when it's being called inside `main()`?\
+**Answer:** It's going to be `i32`. TIP: You can get the information of this by printing `std::any::type_name_of_val(identitiy_function(1337))`
+* What do you call the types that are declared like `T` inside the `< >` brackets? (Hint: It's actually NOT a template).\
+**Answer:** It's called a generic type. Funfact, C++ is the only language calling it a template.
+This is because C++ templates also provides additional features over generic types too.
 
 #### Question 4
 Lets look at some basic type conversion. Consider the followin snippets:
