@@ -444,8 +444,10 @@ fn main() {
     let anover_var: u32 = my_var.try_into().unwrap();
 }
 ```
-* What would actually happen when you execute this code?
-* What is the `try_into()` function?
+* What would actually happen when you execute this code?\
+**Answer:** This code will actually result in a crash, a panic. This is because the `my_var` (a `i32`) variable converted to `u32` will overflow.
+* What is the `try_into()` function?\
+**Answer:** `try_into()` is a function that tries to convert a value of one type to another type.
 
 b)
 ```rust
@@ -458,7 +460,8 @@ fn main() {
     println!("my_var as a char: {}", my_var as char);
 }
 ```
-* What would the print outs be?
+* What would the print outs be?\
+**Answer:** Actually, this code will fail to compile. But you can change the last line to `println!("my_var as a char: {}", my_var as u8 as char);` in which case the resulting conversion will correspond to the character 'Ö'.
 
 c)
 ```rust
@@ -470,7 +473,8 @@ fn main() {
     let another_type = my_object as AnotherStruct;
 }
 ```
-* As a matter of fact, this code will NOT compile, why?
+* As a matter of fact, this code will NOT compile, why?\
+**Answer:** Type casting the value of one type to another using `as` only works for primitive types.
 
 Later on, we will explore how to convert between custom types the correct way.
 
