@@ -906,7 +906,7 @@ In fact, most cases you can rely on the fact that public interfaces in rust are 
 The functions provided by the *modules* are part of it as well.
 
 Although, because of how mutability is dependent on the bindings/context instead of being controlled by the type like it is traditionally (for instance in C++ and Java),
-you will run into situations where you desire that only parts of your object should be mutable - like for instance in smart-pointers (see part 4.4).
+you will run into situations where you desire that only parts of your object should be mutable - like for instance in smart-pointers (see part 4.5).
 This is where interior mutability comes in.
 
 #### Question 6
@@ -947,7 +947,13 @@ mod Chess {
 * Except for partial mutability, what other issue do you think that this solves?
 * What other types in rust also provides interior mutability, and what are their usecases?
 
-### Part 4.4 The Box<T> smart pointer
+### Part 4.4 Unsafe rust
+While rust is built with memory-safety and thread-safety in mind first hand, as a system-level language, rust needs to support certain functionality that is regarded as unsafe.
+In order to isolate and contain the code that "lacks safety", these operations have to be written inside a code-block marked with the `unsafe` keyword.
+
+
+
+### Part 4.5 The Box<T> smart pointer
 In rust, typically you are not allowed to do manual memory management and pointer operations out of the box.
 This includes for instance manually allocating memory on the heap, dereferencing a raw-pointer, or anything that can trigger undefined behaviour.
 If these operations are required for some reason, the code block and functions has to be declared as `unsafe`.
