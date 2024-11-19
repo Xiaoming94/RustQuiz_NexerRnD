@@ -892,24 +892,9 @@ fn main() {
 * Curiously, this one will actually fail to compile, why?
     * (Optional) Discussion question: how can you make this file compile?
 * How can you "release" the referenced that has been borrowed?
-* At first, borrow checking can be really annoying to work around - it exists for a good purpose. Why is borrow checking enforced in rust?
-Hint: Look at the example below (surrounding code is the same as previous)
-```rust
-impl Piece {
-    // ...
-    pub fn set_position_with_value(&mut self, pos: Pos) {
-        self.position = pos;
-    }
-    // ...
-}
-
-fn main() {
-    // ...
-    // my_piece.set_position(current_pos)
-    my_piece.set_position_with_value(*current_pos); // Will fail compilation with a different borrowcheck
-}
-```
-* There are a couple of rules surrounding references and borrowing that are really good to know about when you are working with rust. What are those?
+* There are some "rule of thumb" that are useful when thinking in references and borrows
+    * What are these?
+    * Why is rust using (compile-time) borrow checking? What is the problem that it's trying to prevent? (Hint: Lifetime and thread-safety)
 
 ### Part 4.3 Runtime borrow checking and interior mutability
 If you figured out what borrowing and borrowing-checking is from previous questions,
