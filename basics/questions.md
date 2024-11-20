@@ -951,6 +951,26 @@ mod Chess {
 While rust is built with memory-safety and thread-safety in mind first hand, as a system-level language, rust needs to support certain functionality that is regarded as unsafe.
 In order to isolate and contain the code that "lacks safety", these operations have to be written inside a code-block marked with the `unsafe` keyword.
 
+#### Question 7
+
+```rust
+fn main() {
+    let letter_sequence = "EXAMPLE";
+    let sequence_ptr = letter_sequence.as_ptr();
+    for i in (i..letter_sequence.len()) {
+        unsafe {
+            print!("{} ", *sequence_ptr.add(i));
+        }
+    }
+}
+```
+* Notice that the call to `print!()` is wrapped inside an `unsafe` block, why is this required for the code to compile?
+    * What happens if you remove the `.add()` call?
+    * `pointer::add()` can also be rewritten using the `pointer::offset()` function, how can you rewrite this block of code using `offset()`?
+* If you executed the code, you will notice that it doesn't print out `E X A M P L E`
+    * Why?
+    * How do you make sure that this code prints the expected output?
+* (Optional) What do you think is the corresponding `C/C++` code?
 
 
 ### Part 4.5 The Box<T> smart pointer
