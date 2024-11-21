@@ -953,6 +953,7 @@ In order to isolate and contain the code that "lacks safety", these operations h
 
 #### Question 7
 
+Consider the following rust code:
 ```rust
 fn main() {
     let letter_sequence = "EXAMPLE";
@@ -970,7 +971,40 @@ fn main() {
 * If you executed the code, you will notice that it doesn't print out `E X A M P L E`
     * Why?
     * How do you make sure that this code prints the expected output?
-* (Optional) What do you think is the corresponding `C/C++` code?
+* (Bonus) What do you think is the corresponding `C/C++` code?
+    * Unlike their C/C++ counterparts, rust raw_pointers seem to lack the definition of some operators, which?
+#### Question 8
+
+Consider the following rust code:
+```rust
+unsafe fn raw_pointer_shenanigans<T: Copy, const N: usize>(arr: [T; N]) -> (*const T, usize) {
+    use std::alloc::{Layout, alloc, dealloc};
+    let i_ptr_layout = Layout::new::<T>();
+    let mut ptr = alloc(i_ptr_layout) as *mut T;
+    for val in arr {
+        (*ptr) = val;
+        ptr = ptr.add(1);
+    }
+
+    return (ptr.offset(-(N as isize)), N);
+}
+
+fn main() {
+    unsafe {
+        let (my_ptr,n) = raw_pointer_shenanigans([1,2,3,4]);
+        for i in 0..n {
+            print!("{:?}", *my_ptr.add(i));
+        }
+    }
+}
+```
+* What do you think this function will print out to the terminal?
+* What is the function `raw_pointer_shenanigans()` doing?
+* (Bonus) Through some clever use of `zip()` and ranges, you can rewrite `raw_pointer_shenanigans()` with a immutable raw_pointer, how?`
+* (Bonus) Some other memory safety related questions:
+    * There is one memory-safety feature that still cannot disable (but you can work around it) using unsafe, which feature?
+    * What other operations will become available to you under `unsafe` scopes?
+    * There is one "memory-issue" you can cause *without* using `unsafe`, which is it? Why does rust support it under safe conditions?
 
 
 ### Part 4.5 The Box<T> smart pointer
