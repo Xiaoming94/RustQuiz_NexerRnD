@@ -1004,7 +1004,7 @@ fn main() {
 * (Bonus) Some other memory safety related questions:
     * There is one memory-safety feature that still cannot disable (but you can work around it) using unsafe, which feature?
     * What other operations will become available to you under `unsafe` scopes?
-    * There is one "memory-issue" you can cause *without* using `unsafe`, which is it? Why does rust support it under safe conditions?
+    * There is one "memory-issue" you can cause *without* using `unsafe`, which is it? Why does rust allow it under safe conditions?
 
 
 ### Part 4.5 The Box<T> smart pointer
