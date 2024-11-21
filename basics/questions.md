@@ -598,9 +598,21 @@ mod shapes {
     }
 }
 ```
-* What do you think are the pros and cons of a struct defined this way?
-* There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how?
-
+* What do you think are the pros and cons of a struct defined this way? \
+**Answer:** In general, there aren't any definite pros and cons. It's just a syntactic way of having a named tuple.
+For me however, personally (subjectively), these are the pros and cons:
+    * Pros:
+      * You enable some more advanced type checking outside what a normal rust tuple does.
+      * Sometimes when the names of the field is not interesting, Tuple structs are simple and more straight forward.
+    * Cons:
+      * Unamed fields.
+      * If you are not careful, the compile might give unnecesary warnings.
+* There is a way where you can (through pattern matching) deconstruct the struct from Question 4 into it's fields, how? \
+**Answer:** See the code below:
+```rust
+let Rectangle { width: w, height: h } = Rectangle { width: 3.0, height: 5.0 };
+println!("h: {}, w: {}", h, w);
+```
 #### Question 7
 NOTE: We will actually explore rust Enums through multiple question. While we are at it however, keep in mind of how tuple structs works.
 
