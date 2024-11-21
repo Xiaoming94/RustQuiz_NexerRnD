@@ -672,8 +672,10 @@ impl Shape {
 ```
 
 This implementation is not really ideal... but ignore it for now.
-* What's the difference between using an enum in `match` vs using some other types? (like a string or numeric type (u32,i32,f32))
-* While not related to enums, what do you think is the difference between the functions declared with `pub fn` and those declared with only `fn`?
+* What's the difference between using an enum in `match` vs using some other types? (like a string or numeric type (u32,i32,f32)) \
+**Answer:** Since there are finite number of values for an enum, you can match with every possible values without using a default (i.e. `_`) case.
+* While not related to enums, what do you think is the difference between the functions declared with `pub fn` and those declared with only `fn`? \
+**Answer:** The latter is private and only visible in the module where the struct or enum is defined.
 * (Recommended to use playground) You can also avoid creating functions like `create_rectangle()` and `rectangle_area()` using the syntax
 ```rust
 
@@ -683,8 +685,32 @@ match shape_t {
     }
 }
 ```
-* How can this be accomplished?
-* Which do you prefer and why?
+* How can this be accomplished? \
+**Answer:** For instance in `fn new()`:
+```rust
+
+// This is new()
+match shape_t {
+    ShapeType::Circle => {
+        let radius = width;
+        Shape {
+            shape_t: shape_t,
+            width: radius,
+            height: radius,
+        }
+    }
+
+    ShapeType::Rectangle => {
+        Shape {
+            shape_t: shape_t,
+            width: width,
+            height: height,
+        }
+    }
+}
+```
+* Which do you prefer and why? \
+**Answer:** No right answer here really, just for reflection as a programmer.
 
 #### Question 8
 We can, actually, ditch the structs in the previous code like this
