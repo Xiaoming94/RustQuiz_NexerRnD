@@ -515,14 +515,66 @@ mod shapes {
     }
 }
 ```
-* What is happening in the `impl` code block?
-* What are the difference between the function `new()` and the functions `area()` and `circumference()`?
-* Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.)
-    * Bonus question: Do you **need** a `new()` function to instantiate the struct `Rectangle`?
-* (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for
-    * a *square*?
-    * a *circle*? (the constant for PI is available if you add `use std::f32::consts::PI;` before the declaration of Circle);
+* What is happening in the `impl` code block? \
+**Answer:** Functions for the `struct Rectangle` are defined and implemented.
+* What are the difference between the function `new()` and the functions `area()` and `circumference()`? \
+**Answer:** The `new()` function is more like a class function, while `area()` and `circumference()` are instance functions.
+This is because they require `self` to be around, which only exists on created instances.
+* Baring the fact that the struct `Rectangle` is defined in a module `shape`, how would can you initialize it? (hint: there are two ways.) \
+**Answer:**
+    ```rust
+    //First way, using new();
+    let my_rect = shapes::Rectangle::new(12.0,14.0);
 
+    // Second way, using initialization syntax.
+    // Doesn't work if Rectangle is not declared as pub struct outside of the shapes module
+    let my_rect = shapes::Rectangle {
+        width: 12.0,
+        height: 14.0,
+    }
+    ```
+    * Bonus question: Do you **need** a `new()` function to instantiate the struct `Rectangle`? \
+    **Answer:** no.
+* (Highly recommended that you do these in the playground or godbolt) Now that you have seen a struct, how would you go about writing a struct for
+    * a *square*? \
+    **Answer:** for example:
+    ```rust
+    // Emulating inheritance through composition
+    struct Square {
+        internal: Rectangle,
+    }
+    // reuse the internal Rectangle's functionality
+
+    // As it's own type
+    struct Square {
+        side: f32,
+    }
+
+    // Just define the functions as you see fit.
+    ```
+    * a *circle*? (the constant for PI is available if you add `use std::f32::consts::PI;` before the declaration of Circle); \
+    **Answer:** simple:
+    ```rust
+    struct Circle {
+        radius: f32,
+    }
+
+    impl Circle {
+        pub fn new(radius: f32) -> Self {
+            Circle {
+                radius: radius,
+            }
+        }
+
+        pub area(&self) -> f32 {
+            self.radius.pow(2.0) * PI;
+        }
+
+        pub circumference(&self) -> f32 {
+            2.0 * self.radius * PI;
+        }
+    }
+    ```
 #### Question 6
 The code above can also be rewritten like this, using something called a *tuple struct*:
 ```rust
