@@ -183,7 +183,7 @@ fn main() {
 2 4 2 6
 ```
 * What do you think is happening on Line1 and Line2 of the `main()`?\
-**Answer:** These are the two ways to create a vector from an array, or a *slice* that it is called in rust. One is through a macro, the other through a `from()` constructor.
+**ANSWER:** These are the two ways to create a vector from an array, or a *slice* that it is called in rust. One is through a macro, the other through a `from()` constructor.
 We will explore `from` later on.
 
 #### Question 5
@@ -247,9 +247,9 @@ int main() {
 
 ```
 * If you try and compile the rust code, you will notice that the code fails to compile, why?\
-**Answer:** Move semantics, check part 4 :)
+**ANSWER:** Move semantics, check part 4 :)
 * Do you have any suggestions how to fix this? (Don't spend too much time here since we will explore this in later parts)\
-**Answer:** Check part 4, but you can for instance implement `clone` or make it so that `function_with_struct1()` at the very least borrows (i.e. pass by reference) `struct_instance`.
+**ANSWER:** Check part 4, but you can for instance implement `clone` or make it so that `function_with_struct1()` at the very least borrows (i.e. pass by reference) `struct_instance`.
 
 #### Question 6
 Consider this following, slightly larger rust snippet:
@@ -283,24 +283,24 @@ fn main() {
 
 ```
 * What's the console output of this program?\
-**Answer:** You can check it in playground or godbolt by copy-pasting it. Should be something in the line of
+**ANSWER:** You can check it in playground or godbolt by copy-pasting it. Should be something in the line of
 ```
 6
 Var1 : 7, Var2 : 8
 Half of 6 is: 3
 ```
 * What is happening in the first and second `let a` statement?\
-**Answer:** In rust, you can declare a new variable with the same name as something that already exists, this is called shadowing.
+**ANSWER:** In rust, you can declare a new variable with the same name as something that already exists, this is called shadowing.
     * Btw, you can reproduce the effect of these lines without using the 2nd `let a`, how? (hint: `let mut a = ...;`)\
-    **Answer:**
+    **ANSWER:**
         ```rust
         let mut a = 2;
         a += 4 //No shadowing happens here.
         ```
 * What is happening in the `let ...` statement before the 2nd `println!()`?\
-**Answer:** You are binding the output from `tuple_function` to two variables inside the Left-hand-side tuple (the paranthesis) `var1` and `var2`. This is called pattern-matching or pattern de-structuring. In C++, a similar feature exists called structured binding.
+**ANSWER:** You are binding the output from `tuple_function` to two variables inside the Left-hand-side tuple (the paranthesis) `var1` and `var2`. This is called pattern-matching or pattern de-structuring. In C++, a similar feature exists called structured binding.
 * How do you think the `if let ...` statement is evaluated?\
-**Answer:** In contrast to how it works in C++ (i.e. the variable has to be anything but 0 to be evaluated to true), if-let statements in rust will be evaluated to true if the RHS value is successfully bound to the pattern on the LHS. This, btw, is also true to how `match` works.
+**ANSWER:** In contrast to how it works in C++ (i.e. the variable has to be anything but 0 to be evaluated to true), if-let statements in rust will be evaluated to true if the RHS value is successfully bound to the pattern on the LHS. This, btw, is also true to how `match` works.
 
 The code before the last print is related to the `Option<>` type, which is an `enum`.
 Enums in rust will be explored later.
@@ -319,9 +319,9 @@ fn main() {
 }
 ```
 * What is the purpose of the `mod` and `pub` keywords?\
-**Answer:** `mod` declares a module, `pub` makes the function public - i.e. exports it from the module. This question is only meant to make you aware of modules and function exports. Understanding and using exports and modules are going to be very useful for you when you are working in rust ;)
+**ANSWER:** `mod` declares a module, `pub` makes the function public - i.e. exports it from the module. This question is only meant to make you aware of modules and function exports. Understanding and using exports and modules are going to be very useful for you when you are working in rust ;)
 * How should you call the function `calc_sum()` from the `main()` function?\
-**Answer:** Use the full qualifier name `util::calc_sum(param)`. You can also import it locally in `main()` before using it through `use util::calc_sum`. Btw, this will not work without the `pub` declaration for `calc_sum()`.
+**ANSWER:** Use the full qualifier name `util::calc_sum(param)`. You can also import it locally in `main()` before using it through `use util::calc_sum`. Btw, this will not work without the `pub` declaration for `calc_sum()`.
 
 ## Part 2
 
