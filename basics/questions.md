@@ -498,7 +498,7 @@ impl Shape {
     }
 
     fn circle_area(radius: f32) -> f32 {
-        radius * PI.pow(2)
+        radius.powf(2.0) * PI
     }
 
     fn rectangle_area(width: f32, height: f32) -> f32 {
@@ -551,8 +551,9 @@ enum Shapes {
 
 impl Shapes {
     fn area(&self) -> f32 {
+        use std::f32::consts::PI;
         match *self {
-            Shapes::Circle(radius) => f32 * PI.pow(2),
+            Shapes::Circle(radius) => PI * radius.powf(2.0),
             Shapes::Rectangle(width, height) => width * height,
         }
     }
