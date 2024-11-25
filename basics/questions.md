@@ -725,10 +725,37 @@ fn area(geometric_shape: Shapes) -> f32 {
 }
 
 ```
-* How would you instantiate a shape this way?
+* How would you instantiate a shape this way? \
+**Answer:** Recommend that you try this in Rust playground or Godbolt,
+right answer should be something like `let my_circle = Shapes::Circle(42.0);`.
 * How would you implement the function `area()` here?
-    * Using `if let`
-    * Using `match`
+    * Using `if let` \
+    **Answer:**
+    ```rust
+    fn area(geometric_shape: Shapes) -> f32 {
+        use Shapes::*; //To avoid writing Shapes:: everytime we are using it something
+        use std::f32::consts::PI;
+        if let Circle(radius) = geometric_shape {
+            radius.powf(2.0) * PI
+        } else if let Rectangle(h, w) = geometric_shape {
+            h * w
+        } else {
+            0.0
+        }
+    }
+    ```
+    * Using `match` \
+    **Answer:**
+    ```rust
+    fn area(geometric_shape: Shapes) -> f32 {
+        use Shapes::*;
+        use std::f32::consts::PI;
+        match geometric_shape {
+            Circle(radius) => radius.powf(2.0) * PI,
+            Rectangle (height, width) => height * width,
+        }
+    }
+    ```
 
 #### Question 9
 As a matter of fact, with enums in rust, this is also legal:
