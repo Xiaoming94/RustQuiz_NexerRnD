@@ -851,10 +851,47 @@ impl Shape for Rectangle {
 
 * Using this example as reference, how would you implement shapes for:
     * Circle?
-    * Square?
+    * Square? <br />
+**Answer:** As always, it's recommended to try and solve this on godbolt or rust-playground. Below here are examples of both:
+```rust
 
-* If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these?
-* Can you control the visibility of the functions defined in a trait?
+//Circle
+struct Circle {
+    radius: f32,
+}
+use std::f32::consts::PI;
+
+impl Shape for Circle {
+    fn area(&self) -> f32 {
+        self.radius.powf(2.0) * PI
+    }
+
+    fn circumference(&self) -> f32 {
+        self.radius * 2 * PI
+    }
+}
+
+//Square
+struct Square {
+    side: f32,
+}
+
+impl Shape for Square {
+    fn area(&self) -> f32 {
+        self.side.powf(2.0)
+    }
+
+    fn circumference(&self) -> f32 {
+        4.0 * self.side
+    }
+}
+
+```
+
+* If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these? <br />
+**Answer:** Just do it in the old fashioned way: e.g. `impl Rectangle {...}`
+* Can you control the visibility of the functions define in a trait? <br />
+**Answer:** No, functions in a trait always share the visibility as the trait itself.
 
 ### Part 3.2 Rust's built in traits
 
