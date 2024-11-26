@@ -575,7 +575,6 @@ In terms of programming, rust's traits can be thought of as something similar to
 Let's implement geometrical shapes using a trait instead
 ```rust
 trait Shape {
-    fn shape_name();
     fn area(&self) -> f32;
     fn circumference(&self) -> f32;
 }
@@ -601,7 +600,7 @@ impl Shape for Rectangle {
     * Square?
 
 * If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these?
-* Can you control the visibility of the functions define in a trait?
+* Can you control the visibility of the functions defined in a trait?
 
 ### Part 3.2 Rust's built in traits
 
@@ -620,8 +619,8 @@ impl Coord {
     }
 }
 
-impl From<(u32, u32)> for Coord {
-    fn from(pos: (u32, u32)) -> Self {
+impl From<(i32, i32)> for Coord {
+    fn from(pos: (i32, i32)) -> Self {
         let (x, y) = pos;
         Coord::new(x, y)
     }
