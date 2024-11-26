@@ -917,8 +917,20 @@ impl From<(i32, i32)> for Coord {
     }
 }
 ```
-* What is the purpose of the `From<T>` trait?
-* How can you make use of the functionality provided by the `From<T>` trait? (Hint: There are two ways)
+* What is the purpose of the `From<T>` trait? <br />
+**Answer:** It's the trait that describes a type conversion or type transition from `Type1` to `Type2`.
+Basically if the `From<Type1> for Type2` is implemented, then an explicit type conversion between these two is defined.
+* How can you make use of the functionality provided by the `From<T>` trait? (Hint: There are two ways) <br />
+**Answer:** You can either directly call the `from()` function or use the `.into()` function. If `impl From<Type1> for Type2` is defined, then `Type1::into<Type2>()` is will also be defined.
+To use the code above as an example:
+```rust
+let tuple: (i32, i32) = (4,-1);
+
+// Beware that this will actually not compile because the tuple will be moved
+
+let my_coordinate = Coord::from(tuple); // Directly using the from function
+let my_coordinate = tuple.into(); // Using the into() function.
+```
 
 #### Question 3
 
