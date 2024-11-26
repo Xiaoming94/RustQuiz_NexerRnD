@@ -776,10 +776,47 @@ impl Shapes {
     }
 }
 ```
-* How should the user of this enum call the function area?
-* So, when should a struct be used? When should an enum be used?
-* Without thinking about the implemented functions. How do you think the enum `Option<T>` is defined?
+* How should the user of this enum call the function area? \
+**Answer:** In this case, instances of an enum can be treated as if they are structs:
+```rust
+let my_shape = Shapes::Circle(4.0);
+let my_circle_area = my_shape.area();
+```
+* So, when should a struct be used? When should an enum be used? \
+**Answer:** To put it simply, structs represents one thing, and one thing only.
+Enums can represent many different things but only one thing at a time.
+While in most cases a struct is used, you can use an enum instead, the other way isn't necessary true.
+To put it simply, rust enums are not really pure C-style enums, but more like a tagged union. A
+single enum value can even be written as if it was a struct:
+```rust
+enum Shapes {
+    Circle {
+        radius: f32,
+    },
 
+    Rectangle {
+        width: f32,
+        height: f32,
+    },
+}
+```
+But what this means in practice is that everytime an enum is being used,
+you always have to check which value is used before doing something with it.
+This is not true with structs, so as long as the type checking checks out,
+the struct has one set of behaviours only so the amount of checking is reduced. <br />
+<br />
+Naturally, whichever is being used is a design choice for the program.
+But a good rule of thumb is that if the type is used to represent many things, it should be an enum.
+If the type is supposed to only represent one thing, it's a struct.
+
+* Without thinking about the implemented functions. How do you think the enum `Option<T>` is defined? \
+**Answer:** Quite simply
+```rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
 ## Part 3
 In the last part where we explored the rust type-system, you might have an impression of rust's type-system being pretty stiff and strict.
 Which it is - There is alot of discourse about why the type-system in rust being the way it is.
