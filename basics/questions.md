@@ -567,7 +567,7 @@ This is because they require `self` to be around, which only exists on created i
         }
 
         pub area(&self) -> f32 {
-            self.radius.pow(2.0) * PI;
+            self.radius.powf(2.0) * PI;
         }
 
         pub circumference(&self) -> f32 {
