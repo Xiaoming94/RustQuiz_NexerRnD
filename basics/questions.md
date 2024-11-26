@@ -891,7 +891,7 @@ impl Shape for Square {
 * If you want functions/methods specific to Rectangle (or any other struct), how would you go about implementing these? <br />
 **Answer:** Just do it in the old fashioned way: e.g. `impl Rectangle {...}`
 * Can you control the visibility of the functions define in a trait? <br />
-**Answer:** No, functions in a trait always share the visibility as the trait itself.
+**Answer:** No, functions that belongs to a trait always share the visibility as the trait itself.
 
 ### Part 3.2 Rust's built in traits
 
