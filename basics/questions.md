@@ -698,7 +698,6 @@ fn sort<T: Ord> (list: Vec<T>) -> Vec<T> {
 }
 ```
 * What does this way of declaration guarantee for the type `T`?
-* How can you use other Traits the same way?
 * How do you ensure that the generic type `T` has more traits defined?
 
 #### Question 6
