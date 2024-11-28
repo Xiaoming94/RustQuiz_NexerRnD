@@ -953,7 +953,8 @@ impl Not for Reply {
     }
 }
 ```
-* What operation is defined by the `Not` trait?
+* What operation is defined by the `Not` trait? <br />
+**Answer:** It defines the behaviour of the `!` (i.e. the `not`) operator.
 
 #### Question 4
 
@@ -971,19 +972,40 @@ impl Add for Coord {
     }
 }
 ```
-* What is the operation defined by the `Add<Rhs = Self>` trait?
-    * What is the meaning of `<Rhs = Self>` in the declaration of this trait?
-    * How can you define the same operation with a different (Rhs) type?
+* What is the operation defined by the `Add<Rhs = Self>` trait? <br />
+**Answer:** It defines the behaviour of the `+` (or `add`) operator.
+    * What is the meaning of `<Rhs = Self>` in the declaration of this trait? <br />
+    **Answer:** It's the generic parameter that defines the type of the RHS (right hand side) parameter.
+    By default, it's set to `Self` which denotes the type of the `self` object. (i.e. Coord == Self in this code).
+    * How can you define the same operation with a different (Rhs) type? <br />
+    **Answer:** Declare the implementation with `impl Add<AnotherType> for Coord` and go from there:
+    ```rust
+    impl Add<AnotherType> for Coord {
+        type Output = Self // You can also put another type here.
+        fn add(self, rhs: AnotherType) -> Self::Output {
+            //do something here and return
+            //...
+        }
+    }
+    ```
 
 You might have figured out that the `Add` trait defines a certain binary operator and `Not` trait defines a certain unary operator.
-* What other built in traits that are built in in rust also defines behaviour of operators?
-* Flashback now to the `#[define(...)]` used here-and-there previously, what's the meaning behind these lines that happens before a custom type?
+* What other built in traits that are built in in rust also defines behaviour of operators? <br />
+**Answer:** For example, `Mul<T>` defines multiplication, `AddAssign<T>` defines the `+=` operator and so on,
+you can actually find them on [this section in the rust documentation](https://doc.rust-lang.org/std/ops/index.html).
+* Flashback now to the `#[define(...)]` used here-and-there previously, what's the meaning behind these lines that happens before a custom type? <br />
+**Answer:** It's a notation that tells the compiler to implement these traits for the said type.
 
 Next few partial questions are highly optional.
 * Do they have to share the same characteristics as their corresponding operators in mathematics? An example here is that the multiplicator operator has the following characteristics:
     * **Associative** = `(a * b) * c == a * (b * c)`
-    * **Commutative** = `a * b == b * a`
-* Do you think it's important to keep these characteristics for that operator?
+    * **Commutative** = `a * b == b * a` <br />
+
+    **Answer:** No. There is nothing stopping you from implementing these operators differently from their mathematics counterpart.
+    Even in maths, these properties only holds when defined on scalar. As an example, matrix multiplication is not commutative. 
+* Do you think it's important to keep these characteristics for that operator?<br />
+**Answer:** Every programmer has it's own answer here. But remember that,
+using a non-associative operator for instance makes it so that the order of operations becomes important.
 
 ### Part 3.3 Adding traits to generics
 
