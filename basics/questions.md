@@ -661,7 +661,7 @@ struct Coord(i32, i32);
 impl Add for Coord {
     type Output = Self;
 
-    fn add(self, rhs: Self::Other) -> Self::Output {
+    fn add(self, rhs: Self) -> Self::Output {
         let Self(x1, y1) = self;
         let Self(x2, y2) = rhs;
         return Coord::new(x1 + x2, y1 + y2);
@@ -675,6 +675,7 @@ impl Add for Coord {
 You might have figured out that the `Add` trait defines a certain binary operator and `Not` trait defines a certain unary operator.
 * What other built in traits that are built in in rust also defines behaviour of operators?
 * Flashback now to the `#[define(...)]` used here-and-there previously, what's the meaning behind these lines that happens before a custom type?
+
 Next few partial questions are highly optional.
 * Do they have to share the same characteristics as their corresponding operators in mathematics? An example here is that the multiplicator operator has the following characteristics:
     * **Associative** = `(a * b) * c == a * (b * c)`
