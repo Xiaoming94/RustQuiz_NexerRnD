@@ -1002,7 +1002,7 @@ Next few partial questions are highly optional.
     * **Commutative** = `a * b == b * a` <br />
 
     **Answer:** No. There is nothing stopping you from implementing these operators differently from their mathematics counterpart.
-    Even in maths, these properties only holds when defined on scalar. As an example, matrix multiplication is not commutative. 
+    Even in maths, these properties only holds when defined on scalar. As an example, matrix multiplication is not commutative.
 * Do you think it's important to keep these characteristics for that operator?<br />
 **Answer:** Every programmer has it's own answer here. But remember that,
 using a non-associative operator for instance makes it so that the order of operations becomes important.
@@ -1022,9 +1022,12 @@ fn sort<T: Ord> (list: Vec<T>) -> Vec<T> {
     // return sorted vector
 }
 ```
-* What does this way of declaration guarantee for the type `T`?
-* How can you use other Traits the same way?
-* How do you ensure that the generic type `T` has more traits defined?
+* What does this way of declaration guarantee for the type `T`? <br />
+**Answer:** That the type `T` is orderable. This is important if you want to implement sorting.
+* How can you use other Traits the same way? <br />
+**Answer:** It's as simple as specifying something else next to the (`:`) colon: `T: AnotherTrait` (for instance `T: Eq`).
+* How do you ensure that the generic type `T` has more traits defined? <br />
+**Answer:** This can be accomplished using `+`, for instance: `fn functionName<E: TraitA + TraitB>`.
 
 #### Question 6
 
