@@ -26,7 +26,7 @@ With that said, there might be multiple elements in rust that is recognizable to
 ## Dispelling some myth around Rust
 
 ### You will not have memory leaks in rust
-This is false, system-level programming languages (like C++ and Rust) that supports heap-memory-allocation that also doesn't provide garbage-collection all run into risks of leaking memory. Rust is not an exception. In fact, there are usecases where you want your code to be able to relinquish resources on to certain parts of the memory - one such use case is ABI.
+This is false, system-level programming languages (like C++ and Rust) that supports heap-memory-allocation that also doesn't provide garbage-collection all run into risks of leaking memory. Rust is not an exception. In fact, there are usecases where you want your code to be able to relinquish resources on to certain parts of the memory - one such use case is FFI.
 
 ### You will not have code undefined behaviours in Rust.
 Rust out of the box, don't allow you to write code that triggers undefined behaviours. However, the need to support such code is why the rust provides the `unsafe` keyword. With that said, all this means is that whenever you read a block of code written inside `unsafe {}`  you will instantly know that there are certain action in the code that can trigger undefined behaviour or other operations that can be considered unsafe.
